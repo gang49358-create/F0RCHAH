@@ -4,10 +4,9 @@
 <head>
 
 <meta charset="UTF-8">
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Messenger</title>
+<title>Dark Messenger</title>
 
 <link rel="stylesheet" href="style.css">
 
@@ -17,19 +16,16 @@
 <body>
 
 
-<!-- Авторизация -->
+<!-- ВХОД -->
 
 <div id="authPage">
 
+<h1>Dark Messenger</h1>
 
-<h1>Messenger</h1>
 
-
-<input id="username" placeholder="Username">
-
+<input id="username" placeholder="Имя пользователя">
 
 <input id="email" type="email" placeholder="Email">
-
 
 <input id="password" type="password" placeholder="Пароль">
 
@@ -46,7 +42,6 @@
 
 <p id="authError"></p>
 
-
 </div>
 
 
@@ -54,25 +49,22 @@
 
 
 
-
-
-<!-- Основное приложение -->
-
+<!-- ОСНОВНОЕ ОКНО -->
 
 <div id="appPage" style="display:none;">
 
 
 
-<!-- Левая часть -->
+<!-- Левая колонка -->
+
+<aside id="sidebar">
 
 
-<div id="leftPanel">
+
+<div id="topProfile">
 
 
-<div id="profileMini">
-
-
-<img id="miniAvatar" src="">
+<img id="miniAvatar">
 
 
 <div>
@@ -82,16 +74,16 @@ User
 </b>
 
 
-<span id="profileBio">
+<p id="profileBio">
 Описание
-</span>
+</p>
 
 
 </div>
 
 
 <button id="openProfile">
-⚙️
+☰
 </button>
 
 
@@ -101,10 +93,19 @@ User
 
 
 
-<h3>
-Контакты
-</h3>
+<div id="search">
 
+<input placeholder="Поиск">
+
+</div>
+
+
+
+
+
+<h3>
+Чаты
+</h3>
 
 
 <div id="users">
@@ -113,7 +114,18 @@ User
 
 
 
-</div>
+
+
+<button id="premiumBtn">
+
+⭐ Dark Premium
+
+</button>
+
+
+
+
+</aside>
 
 
 
@@ -122,17 +134,30 @@ User
 
 
 
-<!-- Чат -->
+
+<!-- Окно сообщений -->
 
 
-<div id="chatPanel">
+<section id="chatPanel">
 
 
-<div id="chatTop">
 
-Выберите пользователя
+<header id="chatTop">
 
-</div>
+
+<span>
+Выберите чат
+</span>
+
+
+<button>
+⋮
+</button>
+
+
+</header>
+
+
 
 
 
@@ -143,12 +168,13 @@ User
 
 
 
+
 <div id="messageBox">
 
 
-<input 
+<input
 id="messageText"
-placeholder="Сообщение...">
+placeholder="Сообщение">
 
 
 
@@ -162,7 +188,8 @@ placeholder="Сообщение...">
 
 
 
-</div>
+
+</section>
 
 
 
@@ -175,50 +202,38 @@ placeholder="Сообщение...">
 
 
 
-
-<!-- Окно профиля -->
+<!-- ПРОФИЛЬ -->
 
 
 <div id="profilePage" style="display:none;">
 
 
-
 <h2>
-Мой профиль
+Профиль
 </h2>
 
 
 
-
-<img id="bigAvatar" src="">
-
+<img id="bigAvatar">
 
 
-
-
-<input 
+<input
 id="avatarInput"
 type="file"
 accept="image/*,video/*">
 
 
 
-
-
-<input 
+<input
 id="editName"
 placeholder="Имя">
 
 
 
-
-
-<textarea 
+<textarea
 id="editBio"
-placeholder="Описание о себе">
+placeholder="О себе">
 </textarea>
-
-
 
 
 
@@ -228,14 +243,9 @@ placeholder="Описание о себе">
 
 
 
-
-
 <button id="backBtn">
 Назад
 </button>
-
-
-
 
 
 <button id="logoutBtn">
@@ -243,8 +253,61 @@ placeholder="Описание о себе">
 </button>
 
 
+</div>
+
+
+
+
+
+
+
+
+
+<!-- PREMIUM -->
+
+<div id="premiumPage" style="display:none;">
+
+
+<h2>
+Dark Premium ⭐
+</h2>
+
+
+
+<p>
+Расширенные возможности:
+</p>
+
+
+<ul>
+
+<li>Без рекламы</li>
+
+<li>Особые темы</li>
+
+<li>Премиум значок</li>
+
+<li>Больше настроек профиля</li>
+
+<li>Уникальные реакции</li>
+
+</ul>
+
+
+
+<button id="buyPremium">
+Подключить Premium
+</button>
+
+
+
+<button id="closePremium">
+Назад
+</button>
+
 
 </div>
+
 
 
 
