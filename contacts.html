@@ -27,26 +27,25 @@
 
 
 
-<div class="chat">
+<input 
+id="searchUser"
+class="search"
+placeholder="Введите @username"
+>
 
 
-<div class="avatar">
-+
+
+<button onclick="searchUser()">
+🔍 Найти
+</button>
+
+
+
+<div id="results">
+
+
 </div>
 
-
-<div>
-
-<h3>Добавить контакт</h3>
-
-<p>
-Поиск по @username
-</p>
-
-</div>
-
-
-</div>
 
 
 
@@ -54,34 +53,26 @@
 
 
 <button onclick="openChats()">
-
 💬
 <small>Чаты</small>
-
 </button>
 
 
 <button onclick="openContacts()">
-
 👥
 <small>Контакты</small>
-
 </button>
 
 
 <button onclick="openSettings()">
-
 ⚙️
 <small>Настройки</small>
-
 </button>
 
 
 <button onclick="openProfile()">
-
 👤
 <small>Профиль</small>
-
 </button>
 
 
@@ -90,6 +81,7 @@
 
 
 </div>
+
 
 
 <script src="app.js"></script>
