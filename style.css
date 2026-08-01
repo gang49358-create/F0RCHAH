@@ -467,3 +467,40 @@ font-size:17px;
 max-width:350px;
 
 }
+.bottom-menu{
+
+position:fixed;
+
+bottom:0;
+
+left:0;
+
+width:100%;
+
+height:70px;
+
+background:#17212b;
+
+display:flex;
+
+align-items:center;
+
+justify-content:center;
+
+border-top:1px solid #243447;
+
+}
+
+
+
+.bottom-menu button{
+
+background:#2aabee;
+
+width:160px;
+
+border-radius:25px;
+
+font-size:16px;
+
+}
