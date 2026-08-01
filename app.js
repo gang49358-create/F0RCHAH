@@ -14,6 +14,7 @@ import {
 doc,
 setDoc,
 getDoc,
+getDocs,
 collection,
 addDoc,
 onSnapshot,
@@ -25,7 +26,7 @@ from
 
 
 
-// поля
+// Элементы
 
 const username = document.getElementById("username");
 const email = document.getElementById("email");
@@ -46,10 +47,13 @@ const messageInput = document.getElementById("messageInput");
 
 const messages = document.getElementById("messages");
 
+const usersList = document.getElementById("usersList");
 
 
 
-// регистрация
+
+// РЕГИСТРАЦИЯ
+
 
 register.onclick = async()=>{
 
@@ -71,7 +75,9 @@ doc(db,"users",user.user.uid),
 
 username: username.value,
 
-email: email.value
+email: email.value,
+
+created: Date.now()
 
 }
 
@@ -98,7 +104,8 @@ error.innerHTML=e.message;
 
 
 
-// вход
+
+// ВХОД
 
 
 login.onclick = async()=>{
@@ -112,7 +119,6 @@ auth,
 email.value,
 password.value
 );
-
 
 
 }
@@ -131,7 +137,10 @@ error.innerHTML=e.message;
 
 
 
-// проверка входа
+
+
+
+// ПРОВЕРКА ПОЛЬЗОВАТЕЛЯ
 
 
 onAuthStateChanged(auth, async(user)=>{
@@ -146,7 +155,7 @@ chat.style.display="block";
 
 
 
-let profile = await getDoc(
+const profile = await getDoc(
 doc(db,"users",user.uid)
 );
 
@@ -154,14 +163,19 @@ doc(db,"users",user.uid)
 
 if(profile.exists()){
 
+
 myName.innerHTML =
 profile.data().username;
+
 
 }
 
 
 
 loadMessages();
+
+
+loadUsers();
 
 
 
@@ -186,14 +200,15 @@ chat.style.display="none";
 
 
 
-// отправка сообщений
+
+
+// ОТПРАВКА СООБЩЕНИЙ
 
 
 send.onclick = async()=>{
 
 
-let text =
-messageInput.value;
+const text = messageInput.value;
 
 
 if(text.trim()=="") return;
@@ -204,17 +219,16 @@ await addDoc(
 collection(db,"messages"),
 {
 
-
 text:text,
 
-user:
-auth.currentUser.uid,
+user:auth.currentUser.uid,
 
-time:
-Date.now()
+time:Date.now()
 
+}
 
-});
+);
+
 
 
 messageInput.value="";
@@ -227,10 +241,14 @@ messageInput.value="";
 
 
 
-// загрузка сообщений
+
+
+
+// ЗАГРУЗКА СООБЩЕНИЙ
 
 
 function loadMessages(){
+
 
 
 const q =
@@ -241,21 +259,20 @@ orderBy("time")
 
 
 
-onSnapshot(q,(snap)=>{
+onSnapshot(q,(snapshot)=>{
 
 
 messages.innerHTML="";
 
 
 
-snap.forEach((doc)=>{
+snapshot.forEach((doc)=>{
 
 
-let m=doc.data();
+const data = doc.data();
 
 
-
-let div =
+const div =
 document.createElement("div");
 
 
@@ -263,8 +280,7 @@ div.className="message";
 
 
 div.innerHTML =
-m.text;
-
+data.text;
 
 
 messages.appendChild(div);
@@ -273,6 +289,67 @@ messages.appendChild(div);
 
 });
 
+
+});
+
+
+}
+
+
+
+
+
+
+
+
+
+// ЗАГРУЗКА КОНТАКТОВ
+
+
+async function loadUsers(){
+
+
+usersList.innerHTML="";
+
+
+
+const users =
+await getDocs(
+collection(db,"users")
+);
+
+
+
+
+users.forEach((u)=>{
+
+
+if(u.id !== auth.currentUser.uid){
+
+
+
+const data =
+u.data();
+
+
+
+const div =
+document.createElement("div");
+
+
+div.className="user";
+
+
+div.innerHTML =
+data.username;
+
+
+
+usersList.appendChild(div);
+
+
+
+}
 
 
 });
