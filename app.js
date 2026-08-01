@@ -4,14 +4,16 @@ import { auth, db } from "./firebase.js";
 import {
 createUserWithEmailAndPassword,
 signInWithEmailAndPassword,
-signOut,
 onAuthStateChanged
-} 
+}
 from 
 "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
 
 import {
+doc,
+setDoc,
+getDoc,
 collection,
 addDoc,
 onSnapshot,
@@ -23,60 +25,87 @@ from
 
 
 
-// Элементы
+// поля
 
+const username = document.getElementById("username");
 const email = document.getElementById("email");
 const password = document.getElementById("password");
 
-const registerBtn = document.getElementById("register");
-const loginBtn = document.getElementById("login");
+const register = document.getElementById("register");
+const login = document.getElementById("login");
 
-const logoutBtn = document.getElementById("logout");
-
-const authBlock = document.getElementById("auth");
-const chatBlock = document.getElementById("chat");
+const authBox = document.getElementById("auth");
+const chat = document.getElementById("chat");
 
 const error = document.getElementById("error");
 
-const sendBtn = document.getElementById("send");
+const myName = document.getElementById("myName");
+
+const send = document.getElementById("send");
 const messageInput = document.getElementById("messageInput");
 
 const messages = document.getElementById("messages");
 
 
 
-// Регистрация
 
-registerBtn.onclick = async () => {
+// регистрация
 
-try {
+register.onclick = async()=>{
 
-await createUserWithEmailAndPassword(
+
+try{
+
+
+const user = await createUserWithEmailAndPassword(
 auth,
 email.value,
 password.value
 );
 
-error.innerHTML = "Аккаунт создан";
+
+
+await setDoc(
+doc(db,"users",user.user.uid),
+{
+
+username: username.value,
+
+email: email.value
+
+}
+
+);
+
+
+
+alert("Аккаунт создан");
+
 
 }
 
 catch(e){
 
-error.innerHTML = e.message;
+error.innerHTML=e.message;
 
 }
+
 
 };
 
 
 
 
-// Вход
 
-loginBtn.onclick = async () => {
 
-try {
+// вход
+
+
+login.onclick = async()=>{
+
+
+try{
+
 
 await signInWithEmailAndPassword(
 auth,
@@ -85,43 +114,55 @@ password.value
 );
 
 
+
 }
 
 catch(e){
 
-error.innerHTML = e.message;
+error.innerHTML=e.message;
 
 }
 
-};
-
-
-
-
-// Выход
-
-logoutBtn.onclick = () => {
-
-signOut(auth);
 
 };
 
 
 
 
-// Проверка пользователя
 
-onAuthStateChanged(auth,(user)=>{
+
+// проверка входа
+
+
+onAuthStateChanged(auth, async(user)=>{
 
 
 if(user){
 
-authBlock.style.display="none";
 
-chatBlock.style.display="flex";
+authBox.style.display="none";
+
+chat.style.display="block";
+
+
+
+let profile = await getDoc(
+doc(db,"users",user.uid)
+);
+
+
+
+if(profile.exists()){
+
+myName.innerHTML =
+profile.data().username;
+
+}
+
 
 
 loadMessages();
+
 
 
 }
@@ -129,9 +170,9 @@ loadMessages();
 else{
 
 
-authBlock.style.display="block";
+authBox.style.display="block";
 
-chatBlock.style.display="none";
+chat.style.display="none";
 
 
 }
@@ -142,24 +183,36 @@ chatBlock.style.display="none";
 
 
 
-// Отправка сообщений
-
-sendBtn.onclick = async()=>{
 
 
-let text = messageInput.value;
+
+// отправка сообщений
+
+
+send.onclick = async()=>{
+
+
+let text =
+messageInput.value;
 
 
 if(text.trim()=="") return;
 
 
-await addDoc(collection(db,"messages"),{
+
+await addDoc(
+collection(db,"messages"),
+{
+
 
 text:text,
 
-uid:auth.currentUser.uid,
+user:
+auth.currentUser.uid,
 
-time:Date.now()
+time:
+Date.now()
+
 
 });
 
@@ -173,43 +226,53 @@ messageInput.value="";
 
 
 
-// Загрузка сообщений
+
+// загрузка сообщений
+
 
 function loadMessages(){
 
 
-const q=query(
+const q =
+query(
 collection(db,"messages"),
 orderBy("time")
 );
 
 
 
-onSnapshot(q,(snapshot)=>{
+onSnapshot(q,(snap)=>{
 
 
 messages.innerHTML="";
 
 
-snapshot.forEach((doc)=>{
+
+snap.forEach((doc)=>{
 
 
-let data=doc.data();
+let m=doc.data();
 
 
-let div=document.createElement("div");
+
+let div =
+document.createElement("div");
 
 
 div.className="message";
 
 
-div.innerHTML=data.text;
+div.innerHTML =
+m.text;
+
 
 
 messages.appendChild(div);
 
 
+
 });
+
 
 
 });
