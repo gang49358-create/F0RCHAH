@@ -1,209 +1,218 @@
 import { auth, db } from "./firebase.js";
 
+
 import {
 createUserWithEmailAndPassword,
-signInWithEmailAndPassword
-} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+signInWithEmailAndPassword,
+signOut,
+onAuthStateChanged
+} 
+from 
+"https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
 
 import {
-doc,
-setDoc
-} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
-
-
-
-// РЕГИСТРАЦИЯ FIREBASE
-
-window.register = async function(){
-
-
-let name =
-document.getElementById("name").value;
-
-
-let username =
-document.getElementById("username").value;
-
-
-let email =
-document.getElementById("email").value;
-
-
-let password =
-document.getElementById("password").value;
-
-
-
-if(!name || !username || !email || !password){
-
-alert("Заполни все поля");
-
-return;
-
+collection,
+addDoc,
+onSnapshot,
+query,
+orderBy
 }
+from
+"https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 
 
-if(!username.startsWith("@")){
+// Элементы
 
-username="@"+username;
+const email = document.getElementById("email");
+const password = document.getElementById("password");
 
-}
+const registerBtn = document.getElementById("register");
+const loginBtn = document.getElementById("login");
+
+const logoutBtn = document.getElementById("logout");
+
+const authBlock = document.getElementById("auth");
+const chatBlock = document.getElementById("chat");
+
+const error = document.getElementById("error");
+
+const sendBtn = document.getElementById("send");
+const messageInput = document.getElementById("messageInput");
+
+const messages = document.getElementById("messages");
 
 
 
-try{
+// Регистрация
 
+registerBtn.onclick = async () => {
 
-let userCredential =
+try {
+
 await createUserWithEmailAndPassword(
 auth,
-email,
-password
+email.value,
+password.value
 );
 
-
-
-let user =
-userCredential.user;
-
-
-
-await setDoc(
-doc(db,"users",user.uid),
-{
-
-name:name,
-
-username:username,
-
-email:email,
-
-status:"online"
+error.innerHTML = "Аккаунт создан";
 
 }
 
-);
+catch(e){
 
-
-
-alert("Аккаунт создан");
-
-
-window.location.href="chats.html";
-
+error.innerHTML = e.message;
 
 }
-
-catch(error){
-
-alert(error.message);
-
-}
-
 
 };
 
 
 
 
+// Вход
 
-// ВХОД FIREBASE
+loginBtn.onclick = async () => {
 
-
-window.login = async function(){
-
-
-let email =
-document.getElementById("email").value;
-
-
-let password =
-document.getElementById("password").value;
-
-
-
-try{
-
+try {
 
 await signInWithEmailAndPassword(
 auth,
-email,
-password
+email.value,
+password.value
+);
+
+
+}
+
+catch(e){
+
+error.innerHTML = e.message;
+
+}
+
+};
+
+
+
+
+// Выход
+
+logoutBtn.onclick = () => {
+
+signOut(auth);
+
+};
+
+
+
+
+// Проверка пользователя
+
+onAuthStateChanged(auth,(user)=>{
+
+
+if(user){
+
+authBlock.style.display="none";
+
+chatBlock.style.display="flex";
+
+
+loadMessages();
+
+
+}
+
+else{
+
+
+authBlock.style.display="block";
+
+chatBlock.style.display="none";
+
+
+}
+
+
+});
+
+
+
+
+// Отправка сообщений
+
+sendBtn.onclick = async()=>{
+
+
+let text = messageInput.value;
+
+
+if(text.trim()=="") return;
+
+
+await addDoc(collection(db,"messages"),{
+
+text:text,
+
+uid:auth.currentUser.uid,
+
+time:Date.now()
+
+});
+
+
+messageInput.value="";
+
+
+};
+
+
+
+
+
+// Загрузка сообщений
+
+function loadMessages(){
+
+
+const q=query(
+collection(db,"messages"),
+orderBy("time")
 );
 
 
 
-window.location.href="chats.html";
+onSnapshot(q,(snapshot)=>{
 
 
-}
+messages.innerHTML="";
 
 
-catch(error){
+snapshot.forEach((doc)=>{
 
 
-alert(error.message);
+let data=doc.data();
 
 
-}
+let div=document.createElement("div");
 
 
-};
+div.className="message";
 
 
+div.innerHTML=data.text;
 
 
-
-// ВЫХОД
-
-
-window.logout=function(){
-
-auth.signOut();
-
-window.location.href="index.html";
-
-};
+messages.appendChild(div);
 
 
+});
 
 
+});
 
-// ПЕРЕХОДЫ
-
-
-window.openChat=function(){
-
-window.location.href="chat.html";
-
-}
-
-
-window.openProfile=function(){
-
-window.location.href="profile.html";
-
-}
-
-
-window.openChats=function(){
-
-window.location.href="chats.html";
-
-}
-
-
-window.openContacts=function(){
-
-window.location.href="contacts.html";
-
-}
-
-
-window.openSettings=function(){
-
-window.location.href="settings.html";
 
 }
