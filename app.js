@@ -1,36 +1,55 @@
 import { auth, db } from "./firebase.js";
 
+
 import {
+
 createUserWithEmailAndPassword,
+
 signInWithEmailAndPassword,
+
 onAuthStateChanged,
+
 signOut
+
 }
+
 from
+
 "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
 
 
 import {
 
 doc,
+
 setDoc,
+
 getDoc,
+
 getDocs,
+
 collection,
+
 addDoc,
+
 onSnapshot,
+
 query,
+
 orderBy
 
 }
+
 from
+
 "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 
 
 
+// ---------- ЭЛЕМЕНТЫ ----------
 
-// Авторизация
 
 
 const authPage =
@@ -39,6 +58,7 @@ document.getElementById("authPage");
 
 const appPage =
 document.getElementById("appPage");
+
 
 
 const username =
@@ -53,12 +73,14 @@ const password =
 document.getElementById("password");
 
 
+
 const registerBtn =
 document.getElementById("registerBtn");
 
 
 const loginBtn =
 document.getElementById("loginBtn");
+
 
 
 const authError =
@@ -68,13 +90,9 @@ document.getElementById("authError");
 
 
 
-
-
-// приложение
-
-
 const users =
 document.getElementById("users");
+
 
 
 const messages =
@@ -89,8 +107,10 @@ const sendBtn =
 document.getElementById("sendBtn");
 
 
+
 const chatTop =
 document.getElementById("chatTop");
+
 
 
 
@@ -108,12 +128,12 @@ document.getElementById("profileBio");
 // профиль
 
 
-const profilePage =
-document.getElementById("profilePage");
-
-
 const openProfile =
 document.getElementById("openProfile");
+
+
+const profilePage =
+document.getElementById("profilePage");
 
 
 const backBtn =
@@ -139,6 +159,30 @@ document.getElementById("saveProfileBtn");
 
 
 
+// Premium
+
+
+const premiumBtn =
+document.getElementById("premiumBtn");
+
+
+const premiumPage =
+document.getElementById("premiumPage");
+
+
+const closePremium =
+document.getElementById("closePremium");
+
+
+
+const buyPremium =
+document.getElementById("buyPremium");
+
+
+
+
+
+
 let selectedUser = null;
 
 
@@ -148,7 +192,8 @@ let selectedUser = null;
 
 
 
-// регистрация
+
+// ---------- РЕГИСТРАЦИЯ ----------
 
 
 registerBtn.onclick = async()=>{
@@ -158,10 +203,15 @@ try{
 
 
 const user =
+
 await createUserWithEmailAndPassword(
+
 auth,
+
 email.value,
+
 password.value
+
 );
 
 
@@ -178,7 +228,7 @@ email:email.value,
 
 bio:"",
 
-avatar:""
+premium:false
 
 }
 
@@ -205,7 +255,7 @@ authError.innerHTML=e.message;
 
 
 
-// вход
+// ---------- ВХОД ----------
 
 
 loginBtn.onclick = async()=>{
@@ -245,7 +295,7 @@ authError.innerHTML=e.message;
 
 
 
-// проверка входа
+// ---------- ПРОВЕРКА ----------
 
 
 onAuthStateChanged(auth,async(user)=>{
@@ -256,6 +306,7 @@ if(user){
 
 authPage.style.display="none";
 
+
 appPage.style.display="flex";
 
 
@@ -264,7 +315,6 @@ loadProfile();
 
 
 loadUsers();
-
 
 
 }
@@ -280,6 +330,7 @@ appPage.style.display="none";
 }
 
 
+
 });
 
 
@@ -290,20 +341,15 @@ appPage.style.display="none";
 
 
 
-// профиль
+// ---------- ПРОФИЛЬ ----------
 
 
 async function loadProfile(){
 
 
-const data =
-await getDoc(
+let data = await getDoc(
 
-doc(
-db,
-"users",
-auth.currentUser.uid
-)
+doc(db,"users",auth.currentUser.uid)
 
 );
 
@@ -315,22 +361,16 @@ if(data.exists()){
 let p=data.data();
 
 
-
-profileName.innerHTML =
-p.username;
+profileName.innerHTML=p.username;
 
 
-profileBio.innerHTML =
-p.bio || "Описание";
+profileBio.innerHTML=p.bio || "Описание";
 
 
-
-editName.value =
-p.username;
+editName.value=p.username;
 
 
-editBio.value =
-p.bio || "";
+editBio.value=p.bio || "";
 
 
 }
@@ -341,13 +381,6 @@ p.bio || "";
 
 
 
-
-
-
-
-
-
-// открыть профиль
 
 
 openProfile.onclick=()=>{
@@ -357,8 +390,6 @@ profilePage.style.display="block";
 
 
 };
-
-
 
 
 
@@ -377,33 +408,22 @@ profilePage.style.display="none";
 
 
 
-// сохранить профиль
-
-
 saveProfileBtn.onclick=async()=>{
 
 
 await setDoc(
 
-doc(
-db,
-"users",
-auth.currentUser.uid
-),
+doc(db,"users",auth.currentUser.uid),
 
 {
 
-
 username:editName.value,
 
-
 bio:editBio.value
-
 
 },
 
 {merge:true}
-
 
 );
 
@@ -418,11 +438,6 @@ loadProfile();
 
 
 
-
-
-
-
-// выход
 
 
 logoutBtn.onclick=()=>{
@@ -441,7 +456,7 @@ signOut(auth);
 
 
 
-// пользователи
+// ---------- КОНТАКТЫ ----------
 
 
 async function loadUsers(){
@@ -451,9 +466,12 @@ users.innerHTML="";
 
 
 
-const list =
+let list=
+
 await getDocs(
+
 collection(db,"users")
+
 );
 
 
@@ -461,8 +479,7 @@ collection(db,"users")
 list.forEach((item)=>{
 
 
-if(item.id !== auth.currentUser.uid){
-
+if(item.id!==auth.currentUser.uid){
 
 
 let data=item.data();
@@ -485,8 +502,7 @@ div.onclick=()=>{
 selectedUser=item.id;
 
 
-chatTop.innerHTML=
-"Чат с "+data.username;
+chatTop.innerHTML=data.username;
 
 
 loadMessages();
@@ -503,7 +519,9 @@ users.appendChild(div);
 }
 
 
+
 });
+
 
 
 }
@@ -516,34 +534,26 @@ users.appendChild(div);
 
 
 
-// отправка
+// ---------- СООБЩЕНИЯ ----------
 
 
 sendBtn.onclick=async()=>{
 
 
-if(!selectedUser){
-
-alert("Выберите пользователя");
-
-return;
-
-}
+if(!selectedUser)return;
 
 
+let text=messageText.value;
 
-let text =
-messageText.value;
+
+if(text.trim()=="")return;
 
 
 
-if(text.trim()=="") return;
+let id=[
 
-
-
-let chatId =
-[
 auth.currentUser.uid,
+
 selectedUser
 
 ]
@@ -554,12 +564,7 @@ selectedUser
 
 await addDoc(
 
-collection(
-db,
-"chats",
-chatId,
-"messages"
-),
+collection(db,"chats",id,"messages"),
 
 {
 
@@ -570,9 +575,7 @@ from:auth.currentUser.uid,
 
 time:Date.now()
 
-
 }
-
 
 );
 
@@ -590,16 +593,13 @@ messageText.value="";
 
 
 
-
-// сообщения
-
-
 function loadMessages(){
 
 
-let chatId =
-[
+let id=[
+
 auth.currentUser.uid,
+
 selectedUser
 
 ]
@@ -608,15 +608,9 @@ selectedUser
 
 
 
-const q =
-query(
+let q=query(
 
-collection(
-db,
-"chats",
-chatId,
-"messages"
-),
+collection(db,"chats",id,"messages"),
 
 orderBy("time")
 
@@ -634,7 +628,7 @@ messages.innerHTML="";
 snap.forEach((m)=>{
 
 
-let data=m.data();
+let d=m.data();
 
 
 
@@ -644,17 +638,77 @@ let div=document.createElement("div");
 div.className="message";
 
 
-div.innerHTML=data.text;
+div.innerHTML=d.text;
+
 
 
 messages.appendChild(div);
 
 
-
 });
+
 
 
 });
 
 
 }
+
+
+
+
+
+
+
+
+
+// ---------- PREMIUM ----------
+
+
+
+premiumBtn.onclick=()=>{
+
+
+premiumPage.style.display="block";
+
+
+};
+
+
+
+
+closePremium.onclick=()=>{
+
+
+premiumPage.style.display="none";
+
+
+};
+
+
+
+
+
+buyPremium.onclick=async()=>{
+
+
+await setDoc(
+
+doc(db,"users",auth.currentUser.uid),
+
+{
+
+premium:true
+
+},
+
+{merge:true}
+
+);
+
+
+
+alert("Dark Premium подключён ⭐");
+
+
+};
