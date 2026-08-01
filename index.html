@@ -17,18 +17,29 @@
 <body>
 
 
+<!-- Вход -->
+
 <div id="auth">
+
 
 <h1>Messenger</h1>
 
 
-<input id="username" placeholder="Username">
+<input 
+id="username"
+placeholder="Username">
 
 
-<input id="email" type="email" placeholder="Email">
+<input 
+id="email"
+type="email"
+placeholder="Email">
 
 
-<input id="password" type="password" placeholder="Пароль">
+<input 
+id="password"
+type="password"
+placeholder="Пароль">
 
 
 
@@ -51,14 +62,29 @@
 
 
 
+
+<!-- Главное приложение -->
+
+
 <div id="main" style="display:none;">
 
+
+
+<!-- Левая панель -->
 
 
 <div id="sidebar">
 
 
 <div class="profile">
+
+
+<img id="miniAvatar"
+src=""
+width="40"
+height="40"
+style="border-radius:50%;object-fit:cover;">
+
 
 <span id="myName">
 User
@@ -69,11 +95,16 @@ User
 ⚙️
 </button>
 
+
 </div>
 
 
 
-<h3>Контакты</h3>
+
+
+<h3>
+Контакты
+</h3>
 
 
 <div id="usersList">
@@ -81,11 +112,16 @@ User
 </div>
 
 
+
 </div>
 
 
 
 
+
+
+
+<!-- Чат -->
 
 
 <div id="chat">
@@ -109,8 +145,10 @@ User
 <div id="sendBox">
 
 
-<input id="messageInput"
+<input 
+id="messageInput"
 placeholder="Сообщение...">
+
 
 
 <button id="send">
@@ -118,28 +156,71 @@ placeholder="Сообщение...">
 </button>
 
 
+
+</div>
+
+
+
 </div>
 
 
 </div>
 
 
-</div>
 
 
 
 
 
+
+<!-- Профиль -->
 
 
 <div id="profileWindow" style="display:none;">
 
 
-<h2>Настройки</h2>
+<h2>
+Мой профиль
+</h2>
 
 
-<input id="newUsername"
-placeholder="Новое имя">
+
+<img 
+id="avatar"
+src=""
+width="120"
+height="120"
+style="
+border-radius:50%;
+object-fit:cover;
+">
+
+
+
+<input 
+type="file"
+id="avatarFile"
+accept="image/*,video/*">
+
+
+
+
+
+<input 
+id="newUsername"
+placeholder="Имя пользователя">
+
+
+
+
+
+<textarea
+id="bio"
+placeholder="Описание о себе">
+</textarea>
+
+
+
 
 
 <button id="saveProfile">
@@ -147,7 +228,9 @@ placeholder="Новое имя">
 </button>
 
 
+
 <p id="profileEmail"></p>
+
 
 
 <button id="logout">
@@ -155,12 +238,16 @@ placeholder="Новое имя">
 </button>
 
 
+
 <button id="closeProfile">
 Назад
 </button>
 
 
+
 </div>
+
+
 
 
 
