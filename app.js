@@ -19,9 +19,17 @@ function login(){
 
 let user = localStorage.getItem("user");
 
+
 if(user){
 
-window.location.href = "chats.html";
+localStorage.setItem(
+"status",
+"online"
+);
+
+
+window.location.href="chats.html";
+
 
 }else{
 
@@ -35,9 +43,16 @@ alert("Сначала зарегистрируйтесь");
 
 function logout(){
 
+localStorage.setItem(
+"status",
+"offline"
+);
+
+
 localStorage.removeItem("user");
 
-window.location.href = "index.html";
+
+window.location.href="index.html";
 
 }
 
