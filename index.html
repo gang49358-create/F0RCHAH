@@ -4,83 +4,102 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>My Messenger</title>
+<title>Messenger</title>
 
 <link rel="stylesheet" href="style.css">
+
 </head>
 
 <body>
 
-<div class="container">
 
-    <div id="auth">
-
-        <h1>Messenger</h1>
-
-        <input 
-        id="email" 
-        type="email" 
-        placeholder="Почта">
-
-        <input 
-        id="password" 
-        type="password" 
-        placeholder="Пароль">
+<div class="app">
 
 
-        <button id="register">
-            Регистрация
-        </button>
+<div id="auth">
+
+<h1>Messenger</h1>
+
+<input id="username" placeholder="Username">
+
+<input id="email" placeholder="Email">
+
+<input id="password" type="password" placeholder="Пароль">
 
 
-        <button id="login">
-            Войти
-        </button>
+<button id="register">
+Регистрация
+</button>
 
 
-        <p id="error"></p>
+<button id="login">
+Войти
+</button>
 
-    </div>
+
+<p id="error"></p>
+
+</div>
 
 
 
-    <div id="chat" style="display:none;">
-
-        <div class="header">
-            <h2>Чат</h2>
-
-            <button id="logout">
-                Выйти
-            </button>
-        </div>
 
 
-        <div id="messages">
-
-        </div>
+<div id="chat" style="display:none">
 
 
-        <div class="send">
+<div class="top">
 
-            <input 
-            id="messageInput"
-            placeholder="Сообщение...">
-
-
-            <button id="send">
-                ➤
-            </button>
-
-        </div>
+<h2 id="myName">
+User
+</h2>
 
 
-    </div>
+<button id="settings">
+⚙️
+</button>
+
+
+</div>
+
+
+
+<div id="contacts">
+
+<h3>Контакты</h3>
+
+</div>
+
+
+
+<div id="messages">
+
+</div>
+
+
+
+<div class="send">
+
+<input id="messageInput"
+placeholder="Сообщение">
+
+
+<button id="send">
+➤
+</button>
+
+
+</div>
+
+
+</div>
 
 
 </div>
 
 
 <script type="module" src="app.js"></script>
+
 
 </body>
 </html>
