@@ -1,105 +1,191 @@
-*{
-box-sizing:border-box;
-font-family:Arial,sans-serif;
+* {
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
 }
 
 
-body{
-
-margin:0;
-
-height:100vh;
-
-background:#0e1621;
-
-color:white;
-
+body {
+    margin: 0;
+    height: 100vh;
+    background: #0e1621;
+    color: white;
 }
 
 
 /* Вход */
 
-#auth{
+#auth {
 
-width:100%;
+    width: 100%;
+    max-width: 400px;
 
-max-width:400px;
+    margin: 0 auto;
 
-margin:0 auto;
+    padding: 50px 20px;
 
-padding:40px 20px;
+    text-align: center;
+}
 
-text-align:center;
+
+#auth h1 {
+
+    color: #2aabee;
+
+    font-size: 36px;
 
 }
 
 
 
-#auth h1{
+input,
+textarea {
 
-color:#2aabee;
+    width: 100%;
 
-font-size:35px;
+    padding: 14px;
 
-}
+    margin: 8px 0;
 
+    border-radius: 12px;
 
+    border: none;
 
-input{
+    outline: none;
 
-width:100%;
+    background: #17212b;
 
-padding:14px;
+    color: white;
 
-margin:7px 0;
-
-border-radius:10px;
-
-border:none;
-
-outline:none;
-
-background:#17212b;
-
-color:white;
-
-font-size:16px;
+    font-size: 16px;
 
 }
 
 
 
-button{
+textarea {
 
-border:none;
+    height: 100px;
 
-border-radius:10px;
-
-padding:13px;
-
-background:#2aabee;
-
-color:white;
-
-font-size:16px;
-
-cursor:pointer;
-
-margin:5px 0;
+    resize: none;
 
 }
 
 
+
+button {
+
+    border: none;
+
+    background: #2aabee;
+
+    color: white;
+
+    padding: 12px 18px;
+
+    border-radius: 12px;
+
+    cursor: pointer;
+
+    font-size: 16px;
+
+}
 
 
 
 /* Главное окно */
 
-#main{
+#main {
 
-display:flex;
+    display: flex;
 
-height:100vh;
+    height: 100vh;
+
+    width: 100%;
+
+}
+
+
+
+
+
+/* Левая панель */
+
+
+#sidebar {
+
+    width: 320px;
+
+    background: #17212b;
+
+    border-right: 1px solid #263544;
+
+    display: flex;
+
+    flex-direction: column;
+
+}
+
+
+
+#myProfile {
+
+    height: 75px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    padding: 10px;
+
+    background: #202b36;
+
+}
+
+
+
+#myProfile img {
+
+    width: 55px;
+
+    height: 55px;
+
+    border-radius: 50%;
+
+    object-fit: cover;
+
+}
+
+
+
+#myProfile div {
+
+    flex:1;
+
+}
+
+
+
+#myProfile p {
+
+    margin: 3px 0;
+
+    color:#aaa;
+
+    font-size:13px;
+
+}
+
+
+
+#settings {
+
+    width:45px;
+
+    height:45px;
+
+    padding:0;
 
 }
 
@@ -107,83 +193,35 @@ height:100vh;
 
 
 
-/* Список пользователей */
+#usersList {
 
-#sidebar{
+    padding:10px;
 
-width:280px;
-
-background:#17212b;
-
-border-right:1px solid #263544;
+    overflow-y:auto;
 
 }
 
 
 
-.profile{
 
-height:60px;
 
-display:flex;
+.user {
 
-align-items:center;
+    padding:15px;
 
-justify-content:space-between;
+    background:#202b36;
 
-padding:10px;
+    border-radius:12px;
 
-background:#202b36;
+    margin-bottom:8px;
 
 }
 
 
 
-.profile button{
+.user:hover {
 
-width:45px;
-
-height:40px;
-
-}
-
-
-
-#sidebar h3{
-
-padding-left:15px;
-
-}
-
-
-
-#usersList{
-
-padding:10px;
-
-}
-
-
-
-.user{
-
-background:#202b36;
-
-padding:12px;
-
-border-radius:10px;
-
-margin-bottom:8px;
-
-cursor:pointer;
-
-}
-
-
-
-.user:hover{
-
-background:#2b5278;
+    background:#2b5278;
 
 }
 
@@ -194,93 +232,105 @@ background:#2b5278;
 /* Чат */
 
 
-#chat{
+#chat {
 
-flex:1;
+    flex:1;
 
-display:flex;
+    display:flex;
 
-flex-direction:column;
-
-}
-
-
-
-#chatHeader{
-
-height:60px;
-
-background:#17212b;
-
-padding:20px;
-
-font-size:18px;
-
-border-bottom:1px solid #263544;
+    flex-direction:column;
 
 }
 
 
 
-#messages{
+#chatHeader {
 
-flex:1;
+    height:75px;
 
-overflow-y:auto;
+    display:flex;
 
-padding:20px;
+    align-items:center;
 
-}
+    padding:20px;
 
+    background:#17212b;
 
+    border-bottom:1px solid #263544;
 
-.message{
-
-background:#2b5278;
-
-padding:10px 15px;
-
-border-radius:15px;
-
-margin:8px 0;
-
-max-width:70%;
+    font-size:18px;
 
 }
 
 
 
-#sendBox{
-
-display:flex;
-
-padding:10px;
-
-background:#17212b;
-
-}
 
 
+#messages {
 
-#sendBox input{
+    flex:1;
 
-margin:0;
+    padding:20px;
 
-flex:1;
+    overflow-y:auto;
 
 }
 
 
 
-#send{
+.message {
 
-width:55px;
+    background:#2b5278;
 
-margin-left:10px;
+    padding:12px 16px;
 
-border-radius:50%;
+    border-radius:15px;
+
+    width:max-content;
+
+    max-width:70%;
+
+    margin-bottom:10px;
 
 }
+
+
+
+
+#sendBox {
+
+    display:flex;
+
+    gap:10px;
+
+    padding:12px;
+
+    background:#17212b;
+
+}
+
+
+
+#sendBox input {
+
+    margin:0;
+
+}
+
+
+
+#send {
+
+    width:55px;
+
+    height:55px;
+
+    border-radius:50%;
+
+    padding:0;
+
+}
+
 
 
 
@@ -288,70 +338,60 @@ border-radius:50%;
 
 /* Профиль */
 
+#profileWindow {
 
-#profileWindow{
+    position:fixed;
 
-position:fixed;
+    top:0;
 
-top:0;
+    left:0;
 
-left:0;
+    width:100%;
 
-right:0;
+    height:100%;
 
-bottom:0;
+    background:#0e1621;
 
-background:#0e1621;
+    padding:30px;
 
-padding:30px;
-
-}
-
-
-
-#profileWindow h2{
-
-color:#2aabee;
+    z-index:10;
 
 }
 
 
 
-#error{
+#avatar {
 
-color:red;
+    display:block;
 
-}
-textarea{
+    width:120px;
 
-width:100%;
+    height:120px;
 
-height:100px;
+    object-fit:cover;
 
-background:#17212b;
+    border-radius:50%;
 
-color:white;
-
-border:none;
-
-border-radius:10px;
-
-padding:15px;
-
-font-size:16px;
-
-margin:10px 0;
+    margin:20px auto;
 
 }
 
 
 
-#avatar{
+#profileWindow button {
 
-display:block;
+    width:100%;
 
-margin:20px auto;
+    margin-top:10px;
 
-border:3px solid #2aabee;
+}
+
+
+
+
+
+#error {
+
+    color:red;
 
 }
