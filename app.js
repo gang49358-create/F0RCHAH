@@ -1,4 +1,3 @@
-alert("app.js работает");
 // РЕГИСТРАЦИЯ
 
 function register(){
