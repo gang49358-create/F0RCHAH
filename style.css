@@ -1,502 +1,219 @@
-* {
-    box-sizing: border-box;
-    font-family: Arial, sans-serif;
+*{
+box-sizing:border-box;
+font-family:Arial;
 }
 
 
-body {
-
-    margin:0;
-
-    height:100vh;
-
-    background:#0e1621;
-
-    color:white;
-
+body{
+margin:0;
+background:#0e1621;
+color:white;
 }
 
 
-/* ---------- ВХОД ---------- */
+.app{
 
-
-#authPage {
-
-    max-width:400px;
-
-    margin:auto;
-
-    padding:50px 20px;
-
-    text-align:center;
+display:flex;
+height:100vh;
 
 }
 
 
 
-#authPage h1 {
+/* левая часть */
 
-    color:#2aabee;
+.sidebar{
 
-    font-size:38px;
+width:350px;
+background:#17212b;
+border-right:1px solid #333;
+
+}
+
+
+.header{
+
+padding:15px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+
+}
+
+
+.header h2{
+
+font-size:20px;
+
+}
+
+
+#premium{
+
+background:#ffd700;
+border:0;
+padding:8px 12px;
+border-radius:15px;
+cursor:pointer;
+
+}
+
+
+#search{
+
+margin:10px;
+width:calc(100% - 20px);
+padding:12px;
+
+border-radius:20px;
+border:0;
+
+background:#242f3d;
+color:white;
 
 }
 
 
 
-input,
-textarea {
+.chat-item{
+
+padding:15px;
+
+display:flex;
+gap:15px;
+
+cursor:pointer;
+
+}
 
 
-    width:100%;
+.chat-item:hover{
 
-    background:#17212b;
+background:#202b36;
 
-    border:none;
+}
 
-    border-radius:12px;
 
-    padding:14px;
+.avatar{
 
-    margin:7px 0;
+width:45px;
+height:45px;
 
-    color:white;
+border-radius:50%;
 
-    outline:none;
+background:#3390ec;
 
-    font-size:16px;
+display:flex;
+align-items:center;
+justify-content:center;
 
 }
 
 
 
-textarea {
-
-    height:120px;
-
-}
+/* окно чата */
 
 
+.chat-window{
 
-
-
-button {
-
-    background:#2aabee;
-
-    color:white;
-
-    border:none;
-
-    border-radius:12px;
-
-    padding:12px 18px;
-
-    cursor:pointer;
-
-    font-size:16px;
+flex:1;
+display:flex;
+flex-direction:column;
 
 }
 
 
 
+.chat-header{
 
+height:60px;
+background:#17212b;
 
-/* ---------- ОСНОВНОЙ ЭКРАН ---------- */
+padding:20px;
 
-
-#appPage {
-
-    height:100vh;
-
-    display:flex;
+font-size:18px;
 
 }
 
 
 
+#messages{
 
-
-/* ---------- ЛЕВАЯ ПАНЕЛЬ ---------- */
-
-
-#sidebar {
-
-    width:330px;
-
-    background:#17212b;
-
-    border-right:1px solid #263544;
-
-    display:flex;
-
-    flex-direction:column;
+flex:1;
+padding:20px;
+overflow:auto;
 
 }
 
 
 
+.message{
 
+max-width:60%;
+padding:10px;
 
-#topProfile {
+margin:8px;
 
-    height:80px;
+border-radius:15px;
 
-    display:flex;
-
-    align-items:center;
-
-    padding:10px;
-
-    gap:12px;
-
-    background:#202b36;
+background:#182533;
 
 }
 
 
 
-#topProfile img {
+.my-message{
 
-    width:55px;
-
-    height:55px;
-
-    border-radius:50%;
-
-    object-fit:cover;
-
-    background:#333;
+margin-left:auto;
+background:#2b5278;
 
 }
 
 
 
-#topProfile div {
+.send-box{
 
-    flex:1;
+display:flex;
+padding:10px;
 
-}
-
-
-
-#profileBio {
-
-    color:#9aa4ad;
-
-    font-size:13px;
+background:#17212b;
 
 }
 
 
 
+#messageInput{
 
+flex:1;
 
-#topProfile button {
+padding:12px;
 
-    width:45px;
+border-radius:20px;
 
-    height:45px;
+border:0;
 
-    padding:0;
+background:#242f3d;
 
-}
-
-
-
-
-
-#search {
-
-    padding:10px;
+color:white;
 
 }
 
 
 
+#send{
 
+margin-left:10px;
 
-#sidebar h3 {
+border:0;
 
-    padding-left:15px;
+border-radius:50%;
 
-}
+width:45px;
 
+background:#3390ec;
 
+color:white;
 
-
-
-#users {
-
-    flex:1;
-
-    overflow-y:auto;
-
-    padding:10px;
-
-}
-
-
-
-
-
-.user {
-
-    padding:14px;
-
-    background:#202b36;
-
-    border-radius:12px;
-
-    margin-bottom:8px;
-
-    cursor:pointer;
-
-}
-
-
-
-.user:hover {
-
-    background:#2b5278;
-
-}
-
-
-
-
-
-
-
-#premiumBtn {
-
-    margin:10px;
-
-    background:#d4af37;
-
-    color:black;
-
-}
-
-
-
-
-
-
-
-
-/* ---------- ЧАТ ---------- */
-
-
-#chatPanel {
-
-    flex:1;
-
-    display:flex;
-
-    flex-direction:column;
-
-}
-
-
-
-
-
-#chatTop {
-
-    height:80px;
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:space-between;
-
-    padding:20px;
-
-    background:#17212b;
-
-    border-bottom:1px solid #263544;
-
-    font-size:18px;
-
-}
-
-
-
-#chatTop button {
-
-    width:40px;
-
-    height:40px;
-
-    padding:0;
-
-}
-
-
-
-
-
-#messages {
-
-    flex:1;
-
-    padding:20px;
-
-    overflow-y:auto;
-
-}
-
-
-
-.message {
-
-    background:#2b5278;
-
-    width:max-content;
-
-    max-width:70%;
-
-    padding:12px 16px;
-
-    border-radius:15px;
-
-    margin-bottom:10px;
-
-}
-
-
-
-
-
-
-
-#messageBox {
-
-    display:flex;
-
-    gap:10px;
-
-    padding:12px;
-
-    background:#17212b;
-
-}
-
-
-
-#messageBox input {
-
-    margin:0;
-
-}
-
-
-
-#sendBtn {
-
-    width:55px;
-
-    height:55px;
-
-    border-radius:50%;
-
-}
-
-
-
-
-
-
-
-
-
-/* ---------- ПРОФИЛЬ ---------- */
-
-
-#profilePage,
-#premiumPage {
-
-
-    position:fixed;
-
-    top:0;
-
-    left:0;
-
-    width:100%;
-
-    height:100%;
-
-
-    background:#0e1621;
-
-    padding:30px;
-
-    z-index:20;
-
-}
-
-
-
-
-#bigAvatar {
-
-    width:150px;
-
-    height:150px;
-
-    border-radius:50%;
-
-    object-fit:cover;
-
-    display:block;
-
-    margin:20px auto;
-
-}
-
-
-
-
-
-
-/* ---------- PREMIUM ---------- */
-
-
-#premiumPage h2 {
-
-    color:#d4af37;
-
-}
-
-
-
-#premiumPage li {
-
-    margin:15px;
-
-    font-size:18px;
-
-}
-
-
-
-#buyPremium {
-
-    background:#d4af37;
-
-    color:black;
-
-}
-
-
-
-
-
-#error {
-
-    color:red;
+font-size:20px;
 
 }
