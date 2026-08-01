@@ -195,3 +195,130 @@ document.getElementById("avatar").src=avatar;
 
 
 window.onload=loadProfile;
+let photoInput = document.getElementById("photo");
+
+
+if(photoInput){
+
+
+photoInput.addEventListener("change", function(){
+
+
+let file = this.files[0];
+
+
+if(file){
+
+
+let reader = new FileReader();
+
+
+reader.onload=function(){
+
+
+localStorage.setItem(
+"avatar",
+reader.result
+);
+
+
+document.getElementById("avatar").src =
+reader.result;
+
+
+}
+
+
+reader.readAsDataURL(file);
+
+
+}
+
+
+});
+
+
+}
+
+
+
+
+function saveProfile(){
+
+
+let bio =
+document.getElementById("bioInput").value;
+
+
+
+localStorage.setItem(
+"bio",
+bio
+);
+
+
+
+loadProfile();
+
+
+
+alert("Профиль сохранён");
+
+
+}
+
+
+
+
+
+function loadProfile(){
+
+
+let name =
+localStorage.getItem("name");
+
+
+let username =
+localStorage.getItem("username");
+
+
+let bio =
+localStorage.getItem("bio");
+
+
+let avatar =
+localStorage.getItem("avatar");
+
+
+
+if(document.getElementById("profileName"))
+document.getElementById("profileName").innerText =
+name || "Имя";
+
+
+
+if(document.getElementById("profileUsername"))
+document.getElementById("profileUsername").innerText =
+username || "@username";
+
+
+
+if(document.getElementById("profileBio"))
+document.getElementById("profileBio").innerText =
+bio || "Описание отсутствует";
+
+
+
+if(document.getElementById("avatar") && avatar)
+document.getElementById("avatar").src =
+avatar;
+
+
+}
+
+
+
+window.addEventListener(
+"load",
+loadProfile
+);
