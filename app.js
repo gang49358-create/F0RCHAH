@@ -183,3 +183,27 @@ function back(){
 window.location.href="chats.html";
 
 }
+window.onload=function(){
+
+let name =
+localStorage.getItem("name");
+
+
+let username =
+localStorage.getItem("username");
+
+
+if(document.getElementById("profileName")){
+
+document.getElementById("profileName").innerText=name;
+
+}
+
+
+if(document.getElementById("profileUsername")){
+
+document.getElementById("profileUsername").innerText=username;
+
+}
+
+}
