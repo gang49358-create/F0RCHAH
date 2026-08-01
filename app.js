@@ -385,3 +385,15 @@ function openSettings(){
 window.location.href="settings.html";
 
 }
+function changeTheme(){
+
+document.body.classList.toggle("light");
+
+localStorage.setItem(
+"theme",
+"dark"
+);
+
+alert("Тема DarkWeb включена");
+
+}
