@@ -17,7 +17,7 @@
 <body>
 
 
-<!-- Вход -->
+<!-- ЭКРАН ВХОДА -->
 
 <div id="auth">
 
@@ -25,32 +25,25 @@
 <h1>Messenger</h1>
 
 
-<input 
-id="username"
-placeholder="Username">
+<input id="username" placeholder="Имя пользователя">
 
 
-<input 
-id="email"
-type="email"
-placeholder="Email">
+<input id="email" type="email" placeholder="Email">
 
 
-<input 
-id="password"
-type="password"
-placeholder="Пароль">
+<input id="password" type="password" placeholder="Пароль">
 
 
 
 <button id="register">
-Регистрация
+Создать аккаунт
 </button>
 
 
 <button id="login">
 Войти
 </button>
+
 
 
 <p id="error"></p>
@@ -63,32 +56,43 @@ placeholder="Пароль">
 
 
 
-<!-- Главное приложение -->
+
+
+<!-- ОСНОВНОЕ ПРИЛОЖЕНИЕ -->
 
 
 <div id="main" style="display:none;">
 
 
 
-<!-- Левая панель -->
+<!-- ПАНЕЛЬ КОНТАКТОВ -->
 
 
-<div id="sidebar">
+<aside id="sidebar">
 
 
-<div class="profile">
+<div id="myProfile">
 
 
 <img id="miniAvatar"
 src=""
-width="40"
-height="40"
-style="border-radius:50%;object-fit:cover;">
+alt="avatar">
 
 
-<span id="myName">
+<div>
+
+<b id="myName">
 User
-</span>
+</b>
+
+
+<p id="myBio">
+Описание
+</p>
+
+
+</div>
+
 
 
 <button id="settings">
@@ -107,13 +111,14 @@ User
 </h3>
 
 
+
 <div id="usersList">
 
 </div>
 
 
 
-</div>
+</aside>
 
 
 
@@ -121,17 +126,19 @@ User
 
 
 
-<!-- Чат -->
+<!-- ОКНО ЧАТА -->
 
 
-<div id="chat">
+<section id="chat">
 
 
-<div id="chatHeader">
+<header id="chatHeader">
 
-Выберите пользователя
+Выберите контакт
 
-</div>
+</header>
+
+
 
 
 
@@ -142,12 +149,14 @@ User
 
 
 
+
+
 <div id="sendBox">
 
 
 <input 
 id="messageInput"
-placeholder="Сообщение...">
+placeholder="Написать сообщение...">
 
 
 
@@ -161,10 +170,13 @@ placeholder="Сообщение...">
 
 
 
+</section>
+
+
+
 </div>
 
 
-</div>
 
 
 
@@ -172,11 +184,11 @@ placeholder="Сообщение...">
 
 
 
-
-<!-- Профиль -->
+<!-- ОКНО ПРОФИЛЯ -->
 
 
 <div id="profileWindow" style="display:none;">
+
 
 
 <h2>
@@ -185,30 +197,31 @@ placeholder="Сообщение...">
 
 
 
+
+
 <img 
 id="avatar"
 src=""
-width="120"
-height="120"
-style="
-border-radius:50%;
-object-fit:cover;
-">
+alt="avatar">
+
+
+
 
 
 
 <input 
-type="file"
 id="avatarFile"
+type="file"
 accept="image/*,video/*">
 
 
 
 
 
-<input 
+
+<input
 id="newUsername"
-placeholder="Имя пользователя">
+placeholder="Имя">
 
 
 
@@ -216,8 +229,10 @@ placeholder="Имя пользователя">
 
 <textarea
 id="bio"
-placeholder="Описание о себе">
+placeholder="О себе">
 </textarea>
+
+
 
 
 
@@ -229,18 +244,22 @@ placeholder="Описание о себе">
 
 
 
+
+
 <p id="profileEmail"></p>
 
 
-
-<button id="logout">
-Выйти
-</button>
 
 
 
 <button id="closeProfile">
 Назад
+</button>
+
+
+
+<button id="logout">
+Выйти
 </button>
 
 
