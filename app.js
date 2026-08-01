@@ -364,3 +364,24 @@ alert("Профиль сохранён");
 
 
 });
+function openChats(){
+
+window.location.href="chats.html";
+
+}
+
+
+
+function openContacts(){
+
+window.location.href="contacts.html";
+
+}
+
+
+
+function openSettings(){
+
+window.location.href="settings.html";
+
+}
