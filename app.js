@@ -19,12 +19,11 @@ name
 );
 
 
-alert(
-"Аккаунт создан: "+name
-);
+window.location.href="chats.html";
 
 
 }
+
 
 
 function login(){
@@ -36,20 +35,32 @@ localStorage.getItem("user");
 
 if(user){
 
-alert(
-"Добро пожаловать "+user
-);
+
+window.location.href="chats.html";
 
 
 }else{
 
 
 alert(
-"Сначала зарегистрируйтесь"
+"Нет аккаунта"
 );
 
 
 }
+
+
+}
+
+
+
+function logout(){
+
+
+localStorage.removeItem("user");
+
+
+window.location.href="index.html";
 
 
 }
