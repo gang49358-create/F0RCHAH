@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>MyMessenger - Чаты</title>
+<title>DarkWeb</title>
 
 <link rel="stylesheet" href="style.css">
 
@@ -15,80 +15,88 @@
 
 <body>
 
+
 <div class="chat-app">
 
 
 <div class="header">
 
-<h2 onclick="openProfile()">
-DarkWeb 👤
-</h2>
+<h2>DarkWeb</h2>
+
 
 <button onclick="logout()">
 Выйти
 </button>
 
+
 </div>
+
 
 
 <input 
 class="search"
-placeholder="Поиск чатов..."
+placeholder="Поиск..."
 >
+
+
 
 
 <div id="chatList">
 
 
-<div class="chat" onclick="window.location.href='chat.html'">
+
+<div class="chat" onclick="openChat()">
 
 
-<div class="avatar">
-M
+
+<div class="avatar favorite">
+
+⭐
+
 </div>
+
 
 
 <div>
 
-<h3 id="profileName">
-Пользователь
-</h3>
+<h3>Избранное</h3>
 
 <p>
-
-<span class="status online"></span>
-
-<span id="profileUsername">
-@username
-</span>
-
+Личные сообщения
 </p>
 
-</div>
-
-
-</div>
-
 
 </div>
 
 
 
-<button class="new-chat" onclick="openChat()">
-+
-</button>
+</div>
+
 
 
 </div>
+
+
 
 
 <div class="bottom-menu">
 
+
 <button onclick="openProfile()">
+
 👤 Профиль
+
 </button>
 
+
 </div>
+
+
+
+
+</div>
+
+
 
 <script src="app.js"></script>
 
