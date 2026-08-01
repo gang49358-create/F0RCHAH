@@ -207,3 +207,100 @@ document.getElementById("profileUsername").innerText=username;
 }
 
 }
+let photo =
+document.getElementById("photo");
+
+
+if(photo){
+
+photo.onchange=function(){
+
+let reader=new FileReader();
+
+
+reader.onload=function(){
+
+localStorage.setItem(
+"avatar",
+reader.result
+);
+
+
+document.getElementById("avatar").src=
+reader.result;
+
+}
+
+
+reader.readAsDataURL(
+photo.files[0]
+);
+
+
+}
+
+}
+
+
+
+function saveProfile(){
+
+let bio =
+document.getElementById("bioInput").value;
+
+
+localStorage.setItem(
+"bio",
+bio
+);
+
+
+loadProfile();
+
+
+alert("Профиль сохранён");
+
+}
+
+
+
+
+function loadProfile(){
+
+let name =
+localStorage.getItem("name");
+
+
+let username =
+localStorage.getItem("username");
+
+
+let bio =
+localStorage.getItem("bio");
+
+
+let avatar =
+localStorage.getItem("avatar");
+
+
+
+if(document.getElementById("name"))
+document.getElementById("name").innerText=name;
+
+
+if(document.getElementById("username"))
+document.getElementById("username").innerText=username;
+
+
+if(document.getElementById("bio"))
+document.getElementById("bio").innerText=bio || "Описание отсутствует";
+
+
+if(document.getElementById("avatar") && avatar)
+document.getElementById("avatar").src=avatar;
+
+}
+
+
+
+window.onload=loadProfile;
