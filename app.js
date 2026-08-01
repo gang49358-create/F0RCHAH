@@ -397,3 +397,101 @@ localStorage.setItem(
 alert("Тема DarkWeb включена");
 
 }
+function searchUser(){
+
+
+let search =
+document.getElementById("searchUser").value;
+
+
+
+let username =
+localStorage.getItem("username");
+
+
+let name =
+localStorage.getItem("name");
+
+
+
+let results =
+document.getElementById("results");
+
+
+
+results.innerHTML="";
+
+
+
+if(search === username){
+
+
+
+results.innerHTML = `
+
+
+<div class="chat">
+
+
+<div class="avatar">
+👤
+</div>
+
+
+<div>
+
+<h3>${name}</h3>
+
+<p>${username}</p>
+
+
+<button onclick="addContact()">
+Добавить
+</button>
+
+
+</div>
+
+
+</div>
+
+
+`;
+
+
+
+}else{
+
+
+results.innerHTML = `
+
+<p style="text-align:center;color:#777">
+
+Пользователь не найден
+
+</p>
+
+`;
+
+}
+
+
+
+}
+
+
+
+function addContact(){
+
+
+localStorage.setItem(
+"contact",
+"added"
+);
+
+
+
+alert("Контакт добавлен");
+
+
+}
