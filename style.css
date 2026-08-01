@@ -1,88 +1,116 @@
-body {
+*{
+box-sizing:border-box;
+}
+
+
+body{
 
 margin:0;
+
+font-family:Arial, sans-serif;
+
+background:#0e1621;
+
+color:white;
+
 height:100vh;
-
-background:#17212b;
-
-font-family:Arial;
-
-display:flex;
-justify-content:center;
-align-items:center;
 
 }
 
 
-.container {
 
-background:#242f3d;
+/* Главная страница входа */
+
+.container{
+
+background:#17212b;
 
 width:90%;
+
 max-width:400px;
 
-padding:30px;
+padding:35px;
 
-border-radius:20px;
+border-radius:25px;
+
+position:absolute;
+
+top:50%;
+
+left:50%;
+
+transform:translate(-50%,-50%);
 
 text-align:center;
 
-color:white;
+box-shadow:0 0 30px #000;
 
 }
 
 
-h1 {
+
+h1{
 
 color:#2aabee;
 
+font-size:35px;
+
 }
 
 
-input {
 
-width:90%;
+input{
+
+background:#242f3d;
+
+border:none;
+
+outline:none;
+
+color:white;
+
+width:100%;
 
 padding:15px;
 
-margin:10px;
-
-border-radius:10px;
-
-border:none;
+border-radius:15px;
 
 font-size:16px;
 
+margin:10px 0;
+
 }
 
 
-button {
 
-width:95%;
-
-padding:15px;
-
-margin:10px;
-
-border:none;
-
-border-radius:10px;
+button{
 
 background:#2aabee;
 
+border:none;
+
 color:white;
 
-font-size:18px;
+padding:12px 20px;
+
+border-radius:15px;
+
+font-size:16px;
+
+cursor:pointer;
 
 }
+
+
+
+/* Список чатов */
+
+
 .chat-app{
 
-width:100%;
 height:100vh;
 
-background:#17212b;
-
-color:white;
+background:#0e1621;
 
 }
 
@@ -90,17 +118,27 @@ color:white;
 
 .header{
 
-height:70px;
+height:65px;
 
-background:#242f3d;
+background:#17212b;
 
 display:flex;
 
-justify-content:space-between;
-
 align-items:center;
 
+justify-content:space-between;
+
 padding:0 20px;
+
+box-shadow:0 2px 10px #000;
+
+}
+
+
+
+.header h2{
+
+color:#2aabee;
 
 }
 
@@ -108,9 +146,9 @@ padding:0 20px;
 
 .header button{
 
-width:auto;
+background:#e53935;
 
-padding:10px;
+padding:8px 15px;
 
 font-size:14px;
 
@@ -122,11 +160,9 @@ font-size:14px;
 
 margin:15px;
 
-width:85%;
+width:calc(100% - 30px);
 
-padding:15px;
-
-border-radius:15px;
+background:#242f3d;
 
 }
 
@@ -140,11 +176,21 @@ align-items:center;
 
 padding:15px;
 
-background:#202b36;
-
 margin:10px;
 
-border-radius:15px;
+background:#17212b;
+
+border-radius:18px;
+
+transition:.2s;
+
+}
+
+
+
+.chat:active{
+
+transform:scale(.97);
 
 }
 
@@ -152,13 +198,13 @@ border-radius:15px;
 
 .avatar{
 
-width:50px;
+width:55px;
 
-height:50px;
-
-background:#2aabee;
+height:55px;
 
 border-radius:50%;
+
+background:#2aabee;
 
 display:flex;
 
@@ -168,6 +214,8 @@ justify-content:center;
 
 font-size:25px;
 
+font-weight:bold;
+
 margin-right:15px;
 
 }
@@ -176,7 +224,7 @@ margin-right:15px;
 
 .chat h3{
 
-margin:0;
+margin:0 0 5px 0;
 
 }
 
@@ -184,12 +232,15 @@ margin:0;
 
 .chat p{
 
-margin:5px 0;
+margin:0;
 
-color:#aaa;
+color:#8b9aa8;
 
 }
 
+
+
+/* Кнопка + */
 
 
 .new-chat{
@@ -200,88 +251,133 @@ right:25px;
 
 bottom:25px;
 
-width:60px;
+width:65px;
 
-height:60px;
+height:65px;
 
 border-radius:50%;
 
 font-size:35px;
 
+box-shadow:0 5px 20px #000;
+
 }
+
+
+
+/* Окно чата */
+
+
 .chat-window{
 
 height:100vh;
-background:#17212b;
-color:white;
+
 display:flex;
+
 flex-direction:column;
 
+background:#0e1621;
+
 }
+
 
 
 .chat-header{
 
-height:60px;
-background:#242f3d;
+height:65px;
+
+background:#17212b;
 
 display:flex;
+
 align-items:center;
-gap:20px;
+
+gap:15px;
 
 padding:0 15px;
 
 }
 
 
+
+.chat-header h2{
+
+color:#2aabee;
+
+}
+
+
+
 .messages{
 
 flex:1;
+
 padding:15px;
-overflow:auto;
+
+overflow-y:auto;
 
 }
+
+
+
+/* Сообщения */
 
 
 .message{
 
 background:#2aabee;
 
-padding:10px;
+padding:12px 16px;
 
-border-radius:15px;
+border-radius:18px 18px 5px 18px;
 
-margin:10px;
+margin:10px 0;
 
-max-width:70%;
+max-width:75%;
 
 margin-left:auto;
 
+font-size:16px;
+
+box-shadow:0 3px 10px #000;
+
 }
 
+
+
+/* Поле отправки */
 
 
 .send-box{
 
 display:flex;
+
 padding:10px;
 
-background:#242f3d;
+background:#17212b;
 
 }
+
 
 
 .send-box input{
 
-flex:1;
-
 margin:0;
 
+margin-right:10px;
+
 }
+
 
 
 .send-box button{
 
 width:60px;
+
+height:50px;
+
+border-radius:50%;
+
+font-size:20px;
 
 }
