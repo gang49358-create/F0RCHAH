@@ -1,7 +1,10 @@
 <!DOCTYPE html>
 <html lang="ru">
+
 <head>
+
 <meta charset="UTF-8">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Messenger</title>
@@ -10,21 +13,38 @@
 
 </head>
 
+
 <body>
 
 
-<div class="app">
+<div class="container">
 
+
+<!-- Регистрация и вход -->
 
 <div id="auth">
 
+
 <h1>Messenger</h1>
 
-<input id="username" placeholder="Username">
 
-<input id="email" placeholder="Email">
+<input 
+id="username"
+type="text"
+placeholder="Username">
 
-<input id="password" type="password" placeholder="Пароль">
+
+<input 
+id="email"
+type="email"
+placeholder="Email">
+
+
+<input 
+id="password"
+type="password"
+placeholder="Пароль">
+
 
 
 <button id="register">
@@ -32,12 +52,15 @@
 </button>
 
 
+
 <button id="login">
 Войти
 </button>
 
 
+
 <p id="error"></p>
+
 
 </div>
 
@@ -45,13 +68,18 @@
 
 
 
-<div id="chat" style="display:none">
+<!-- Чат -->
 
 
-<div class="top">
+<div id="chat" style="display:none;">
+
+
+
+<div class="header">
+
 
 <h2 id="myName">
-User
+Профиль
 </h2>
 
 
@@ -64,13 +92,35 @@ User
 
 
 
+
+
 <div id="contacts">
 
-<h3>Контакты</h3>
 
-<div id="usersList"></div>
+<h3>
+Контакты
+</h3>
+
+
+<div id="usersList">
 
 </div>
+
+
+</div>
+
+
+
+
+
+
+<div id="chatTitle">
+
+Выберите пользователя
+
+</div>
+
+
 
 
 
@@ -80,10 +130,16 @@ User
 
 
 
+
+
+
 <div class="send">
 
-<input id="messageInput"
-placeholder="Сообщение">
+
+<input
+id="messageInput"
+placeholder="Сообщение...">
+
 
 
 <button id="send">
@@ -94,14 +150,19 @@ placeholder="Сообщение">
 </div>
 
 
+
+
 </div>
 
 
 </div>
+
+
 
 
 <script type="module" src="app.js"></script>
 
 
 </body>
+
 </html>
