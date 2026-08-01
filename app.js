@@ -304,3 +304,8 @@ document.getElementById("avatar").src=avatar;
 
 
 window.onload=loadProfile;
+function openProfile(){
+
+window.location.href="profile.html";
+
+}
