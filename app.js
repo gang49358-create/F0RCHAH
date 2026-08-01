@@ -322,3 +322,45 @@ window.addEventListener(
 "load",
 loadProfile
 );
+document.addEventListener("DOMContentLoaded", function(){
+
+
+let saveButton = document.getElementById("saveButton");
+
+
+if(saveButton){
+
+
+saveButton.onclick = function(){
+
+
+let bio = document.getElementById("bioInput").value;
+
+
+localStorage.setItem(
+"bio",
+bio
+);
+
+
+let bioText = document.getElementById("profileBio");
+
+
+if(bioText){
+
+bioText.innerText = bio;
+
+}
+
+
+alert("Профиль сохранён");
+
+
+};
+
+
+}
+
+
+
+});
