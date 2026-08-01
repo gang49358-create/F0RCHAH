@@ -1,10 +1,50 @@
 function register(){
 
-let name = document.getElementById("username").value;
+let name =
+document.getElementById("name").value;
 
-if(name === ""){
-alert("Введите имя");
+
+let username =
+document.getElementById("username").value;
+
+
+if(name=="" || username==""){
+
+alert("Заполните все поля");
+
 return;
+
+}
+
+
+if(!username.startsWith("@")){
+
+username = "@" + username;
+
+}
+
+
+localStorage.setItem(
+"name",
+name
+);
+
+
+localStorage.setItem(
+"username",
+username
+);
+
+
+localStorage.setItem(
+"status",
+"online"
+);
+
+
+window.location.href="chats.html";
+
+
 }
 
 localStorage.setItem("user", name);
