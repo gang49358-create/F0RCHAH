@@ -2,36 +2,36 @@
 box-sizing:border-box;
 }
 
-
 body{
 
 margin:0;
 
-font-family:Arial, sans-serif;
+height:100vh;
 
-background:#0e1621;
+background:#050505;
 
 color:white;
 
-height:100vh;
+font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
 
 }
 
 
-
-/* Главная страница входа */
+/* Экраны входа */
 
 .container{
 
-background:#17212b;
-
 width:90%;
 
-max-width:400px;
+max-width:380px;
 
-padding:35px;
+background:#0b0b0b;
+
+border:1px solid #1c1c1c;
 
 border-radius:25px;
+
+padding:35px;
 
 position:absolute;
 
@@ -43,17 +43,18 @@ transform:translate(-50%,-50%);
 
 text-align:center;
 
-box-shadow:0 0 30px #000;
+box-shadow:0 20px 60px #000;
 
 }
 
 
+.container h1{
 
-h1{
+font-size:34px;
 
-color:#2aabee;
+letter-spacing:2px;
 
-font-size:35px;
+color:white;
 
 }
 
@@ -61,23 +62,31 @@ font-size:35px;
 
 input{
 
-background:#242f3d;
-
-border:none;
-
-outline:none;
-
-color:white;
-
 width:100%;
 
 padding:15px;
 
+margin:10px 0;
+
+background:#111;
+
+border:1px solid #222;
+
 border-radius:15px;
+
+color:white;
 
 font-size:16px;
 
-margin:10px 0;
+outline:none;
+
+}
+
+
+
+input:focus{
+
+border-color:#555;
 
 }
 
@@ -85,32 +94,44 @@ margin:10px 0;
 
 button{
 
-background:#2aabee;
+background:#fff;
+
+color:#000;
 
 border:none;
 
-color:white;
-
-padding:12px 20px;
+padding:14px;
 
 border-radius:15px;
 
 font-size:16px;
 
+font-weight:600;
+
 cursor:pointer;
+
+transition:.2s;
 
 }
 
 
 
-/* Список чатов */
+button:active{
+
+transform:scale(.96);
+
+}
+
+
+
+/* Чаты */
 
 
 .chat-app{
 
 height:100vh;
 
-background:#0e1621;
+background:#050505;
 
 }
 
@@ -118,9 +139,11 @@ background:#0e1621;
 
 .header{
 
-height:65px;
+height:70px;
 
-background:#17212b;
+background:#090909;
+
+border-bottom:1px solid #1c1c1c;
 
 display:flex;
 
@@ -130,15 +153,13 @@ justify-content:space-between;
 
 padding:0 20px;
 
-box-shadow:0 2px 10px #000;
-
 }
 
 
 
 .header h2{
 
-color:#2aabee;
+letter-spacing:1px;
 
 }
 
@@ -146,11 +167,11 @@ color:#2aabee;
 
 .header button{
 
-background:#e53935;
+background:#151515;
 
-padding:8px 15px;
+color:white;
 
-font-size:14px;
+border:1px solid #333;
 
 }
 
@@ -162,10 +183,13 @@ margin:15px;
 
 width:calc(100% - 30px);
 
-background:#242f3d;
+background:#111;
 
 }
 
+
+
+/* карточка чата */
 
 
 .chat{
@@ -174,23 +198,15 @@ display:flex;
 
 align-items:center;
 
-padding:15px;
+padding:16px;
 
 margin:10px;
 
-background:#17212b;
+background:#0c0c0c;
+
+border:1px solid #1b1b1b;
 
 border-radius:18px;
-
-transition:.2s;
-
-}
-
-
-
-.chat:active{
-
-transform:scale(.97);
 
 }
 
@@ -204,7 +220,9 @@ height:55px;
 
 border-radius:50%;
 
-background:#2aabee;
+background:#181818;
+
+border:1px solid #333;
 
 display:flex;
 
@@ -212,9 +230,7 @@ align-items:center;
 
 justify-content:center;
 
-font-size:25px;
-
-font-weight:bold;
+font-size:22px;
 
 margin-right:15px;
 
@@ -222,172 +238,16 @@ margin-right:15px;
 
 
 
-.chat h3{
+/* статус */
 
-margin:0 0 5px 0;
 
-}
-
-
-
-.chat p{
-
-margin:0;
-
-color:#8b9aa8;
-
-}
-
-
-
-/* Кнопка + */
-
-
-.new-chat{
-
-position:fixed;
-
-right:25px;
-
-bottom:25px;
-
-width:65px;
-
-height:65px;
-
-border-radius:50%;
-
-font-size:35px;
-
-box-shadow:0 5px 20px #000;
-
-}
-
-
-
-/* Окно чата */
-
-
-.chat-window{
-
-height:100vh;
-
-display:flex;
-
-flex-direction:column;
-
-background:#0e1621;
-
-}
-
-
-
-.chat-header{
-
-height:65px;
-
-background:#17212b;
-
-display:flex;
-
-align-items:center;
-
-gap:15px;
-
-padding:0 15px;
-
-}
-
-
-
-.chat-header h2{
-
-color:#2aabee;
-
-}
-
-
-
-.messages{
-
-flex:1;
-
-padding:15px;
-
-overflow-y:auto;
-
-}
-
-
-
-/* Сообщения */
-
-
-.message{
-
-background:#2aabee;
-
-padding:12px 16px;
-
-border-radius:18px 18px 5px 18px;
-
-margin:10px 0;
-
-max-width:75%;
-
-margin-left:auto;
-
-font-size:16px;
-
-box-shadow:0 3px 10px #000;
-
-}
-
-
-
-/* Поле отправки */
-
-
-.send-box{
-
-display:flex;
-
-padding:10px;
-
-background:#17212b;
-
-}
-
-
-
-.send-box input{
-
-margin:0;
-
-margin-right:10px;
-
-}
-
-
-
-.send-box button{
-
-width:60px;
-
-height:50px;
-
-border-radius:50%;
-
-font-size:20px;
-
-}
 .status{
 
 display:inline-block;
 
-width:10px;
+width:9px;
 
-height:10px;
+height:9px;
 
 border-radius:50%;
 
@@ -399,24 +259,61 @@ margin-right:5px;
 
 .online{
 
-background:#35c759;
+background:#00ff66;
 
-box-shadow:0 0 8px #35c759;
+box-shadow:0 0 10px #00ff66;
+
+}
+
+
+
+/* нижняя панель */
+
+
+.bottom-menu{
+
+position:fixed;
+
+bottom:0;
+
+left:0;
+
+width:100%;
+
+height:75px;
+
+background:#090909;
+
+border-top:1px solid #1c1c1c;
+
+display:flex;
+
+align-items:center;
+
+justify-content:center;
 
 }
 
 
 
-.offline{
+.bottom-menu button{
 
-background:#777;
+width:180px;
+
+background:#fff;
 
 }
+
+
+
+/* профиль */
+
+
 .profile{
 
 height:100vh;
 
-background:#0e1621;
+background:#050505;
 
 display:flex;
 
@@ -428,25 +325,23 @@ justify-content:center;
 
 padding:20px;
 
-text-align:center;
-
 }
 
 
 
 .profile-avatar{
 
-width:130px;
+width:140px;
 
-height:130px;
+height:140px;
 
 border-radius:50%;
 
 object-fit:cover;
 
-background:#242f3d;
+background:#111;
 
-margin-bottom:20px;
+border:2px solid #333;
 
 }
 
@@ -454,7 +349,7 @@ margin-bottom:20px;
 
 .profile p{
 
-color:#8b9aa8;
+color:#999;
 
 font-size:17px;
 
@@ -462,45 +357,115 @@ font-size:17px;
 
 
 
-.profile input{
+/* чат */
 
-max-width:350px;
+
+.chat-window{
+
+height:100vh;
+
+background:#050505;
+
+display:flex;
+
+flex-direction:column;
 
 }
-.bottom-menu{
 
-position:fixed;
 
-bottom:0;
 
-left:0;
-
-width:100%;
+.chat-header{
 
 height:70px;
 
-background:#17212b;
+background:#090909;
+
+border-bottom:1px solid #1c1c1c;
 
 display:flex;
 
 align-items:center;
 
-justify-content:center;
+gap:15px;
 
-border-top:1px solid #243447;
+padding:15px;
 
 }
 
 
 
-.bottom-menu button{
+.messages{
 
-background:#2aabee;
+flex:1;
 
-width:160px;
+padding:15px;
 
-border-radius:25px;
+overflow:auto;
 
-font-size:16px;
+}
+
+
+
+.message{
+
+background:#fff;
+
+color:#000;
+
+padding:12px 16px;
+
+border-radius:18px;
+
+margin:10px 0;
+
+max-width:75%;
+
+margin-left:auto;
+
+}
+
+
+
+.send-box{
+
+display:flex;
+
+background:#090909;
+
+padding:10px;
+
+border-top:1px solid #1c1c1c;
+
+}
+
+
+
+.send-box input{
+
+margin:0;
+
+}
+
+
+
+.send-box button{
+
+width:55px;
+
+height:55px;
+
+border-radius:50%;
+
+margin-left:10px;
+
+}
+
+
+
+/* скрытый стиль */
+
+::-webkit-scrollbar{
+
+width:0;
 
 }
