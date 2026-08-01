@@ -4,9 +4,10 @@ import { auth, db } from "./firebase.js";
 import {
 createUserWithEmailAndPassword,
 signInWithEmailAndPassword,
-onAuthStateChanged
+onAuthStateChanged,
+signOut
 }
-from 
+from
 "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
 
@@ -26,33 +27,114 @@ from
 
 
 
-// Элементы
 
-const username = document.getElementById("username");
-const email = document.getElementById("email");
-const password = document.getElementById("password");
 
-const register = document.getElementById("register");
-const login = document.getElementById("login");
+// Элементы входа
 
 const authBox = document.getElementById("auth");
-const chat = document.getElementById("chat");
 
-const error = document.getElementById("error");
+const username =
+document.getElementById("username");
 
-const myName = document.getElementById("myName");
+const email =
+document.getElementById("email");
 
-const send = document.getElementById("send");
-const messageInput = document.getElementById("messageInput");
-
-const messages = document.getElementById("messages");
-
-const usersList = document.getElementById("usersList");
+const password =
+document.getElementById("password");
 
 
+const register =
+document.getElementById("register");
 
 
-// РЕГИСТРАЦИЯ
+const login =
+document.getElementById("login");
+
+
+const error =
+document.getElementById("error");
+
+
+
+
+
+// Главное окно
+
+const main =
+document.getElementById("main");
+
+
+const myName =
+document.getElementById("myName");
+
+
+const usersList =
+document.getElementById("usersList");
+
+
+const messages =
+document.getElementById("messages");
+
+
+const messageInput =
+document.getElementById("messageInput");
+
+
+const send =
+document.getElementById("send");
+
+
+const chatHeader =
+document.getElementById("chatHeader");
+
+
+
+
+
+// Профиль
+
+const settings =
+document.getElementById("settings");
+
+
+const profileWindow =
+document.getElementById("profileWindow");
+
+
+const newUsername =
+document.getElementById("newUsername");
+
+
+const saveProfile =
+document.getElementById("saveProfile");
+
+
+const profileEmail =
+document.getElementById("profileEmail");
+
+
+const logout =
+document.getElementById("logout");
+
+
+const closeProfile =
+document.getElementById("closeProfile");
+
+
+
+
+
+let currentUserChat = null;
+
+
+
+
+
+
+
+
+
+// Регистрация
 
 
 register.onclick = async()=>{
@@ -61,7 +143,8 @@ register.onclick = async()=>{
 try{
 
 
-const user = await createUserWithEmailAndPassword(
+const user =
+await createUserWithEmailAndPassword(
 auth,
 email.value,
 password.value
@@ -73,11 +156,11 @@ await setDoc(
 doc(db,"users",user.user.uid),
 {
 
-username: username.value,
+username:username.value,
 
-email: email.value,
+email:email.value,
 
-created: Date.now()
+created:Date.now()
 
 }
 
@@ -105,7 +188,10 @@ error.innerHTML=e.message;
 
 
 
-// ВХОД
+
+
+
+// Вход
 
 
 login.onclick = async()=>{
@@ -140,10 +226,10 @@ error.innerHTML=e.message;
 
 
 
-// ПРОВЕРКА ПОЛЬЗОВАТЕЛЯ
+// Проверка пользователя
 
 
-onAuthStateChanged(auth, async(user)=>{
+onAuthStateChanged(auth,async(user)=>{
 
 
 if(user){
@@ -151,11 +237,12 @@ if(user){
 
 authBox.style.display="none";
 
-chat.style.display="block";
+main.style.display="flex";
 
 
 
-const profile = await getDoc(
+let profile =
+await getDoc(
 doc(db,"users",user.uid)
 );
 
@@ -172,11 +259,7 @@ profile.data().username;
 
 
 
-loadMessages();
-
-
 loadUsers();
-
 
 
 }
@@ -186,10 +269,11 @@ else{
 
 authBox.style.display="block";
 
-chat.style.display="none";
+main.style.display="none";
 
 
 }
+
 
 
 });
@@ -202,26 +286,133 @@ chat.style.display="none";
 
 
 
-// ОТПРАВКА СООБЩЕНИЙ
+// Пользователи
+
+
+async function loadUsers(){
+
+
+usersList.innerHTML="";
+
+
+let users =
+await getDocs(
+collection(db,"users")
+);
+
+
+
+users.forEach((item)=>{
+
+
+if(item.id !== auth.currentUser.uid){
+
+
+let data =
+item.data();
+
+
+
+let div =
+document.createElement("div");
+
+
+
+div.className="user";
+
+
+div.innerHTML =
+data.username;
+
+
+
+div.onclick=()=>{
+
+
+currentUserChat=item.id;
+
+
+chatHeader.innerHTML=
+"Чат с "+data.username;
+
+
+loadMessages();
+
+
+};
+
+
+
+usersList.appendChild(div);
+
+
+
+}
+
+
+});
+
+
+}
+
+
+
+
+
+
+
+
+
+// Отправка сообщения
 
 
 send.onclick = async()=>{
 
 
-const text = messageInput.value;
+if(!currentUserChat){
+
+alert("Выберите пользователя");
+
+return;
+
+}
+
+
+
+let text =
+messageInput.value;
+
 
 
 if(text.trim()=="") return;
 
 
 
+let chatId =
+[
+auth.currentUser.uid,
+currentUserChat
+]
+.sort()
+.join("_");
+
+
+
+
 await addDoc(
-collection(db,"messages"),
+
+collection(
+db,
+"chats",
+chatId,
+"messages"
+),
+
 {
 
 text:text,
 
-user:auth.currentUser.uid,
+from:auth.currentUser.uid,
 
 time:Date.now()
 
@@ -244,35 +435,54 @@ messageInput.value="";
 
 
 
-// ЗАГРУЗКА СООБЩЕНИЙ
+// Загрузка сообщений
 
 
 function loadMessages(){
 
 
+let chatId =
+[
+auth.currentUser.uid,
+currentUserChat
+]
+.sort()
+.join("_");
 
-const q =
+
+
+let q =
 query(
-collection(db,"messages"),
+
+collection(
+db,
+"chats",
+chatId,
+"messages"
+),
+
 orderBy("time")
+
 );
 
 
 
-onSnapshot(q,(snapshot)=>{
+onSnapshot(q,(snap)=>{
 
 
 messages.innerHTML="";
 
 
 
-snapshot.forEach((doc)=>{
+snap.forEach((m)=>{
 
 
-const data = doc.data();
+let data =
+m.data();
 
 
-const div =
+
+let div =
 document.createElement("div");
 
 
@@ -281,6 +491,7 @@ div.className="message";
 
 div.innerHTML =
 data.text;
+
 
 
 messages.appendChild(div);
@@ -303,56 +514,104 @@ messages.appendChild(div);
 
 
 
-// ЗАГРУЗКА КОНТАКТОВ
+
+// Настройки
 
 
-async function loadUsers(){
+settings.onclick=async()=>{
 
 
-usersList.innerHTML="";
+profileWindow.style.display="block";
 
 
 
-const users =
-await getDocs(
-collection(db,"users")
+let data =
+await getDoc(
+doc(db,"users",auth.currentUser.uid)
 );
 
 
 
-
-users.forEach((u)=>{
-
-
-if(u.id !== auth.currentUser.uid){
+if(data.exists()){
 
 
-
-const data =
-u.data();
-
+newUsername.value=
+data.data().username;
 
 
-const div =
-document.createElement("div");
-
-
-div.className="user";
-
-
-div.innerHTML =
-data.username;
-
-
-
-usersList.appendChild(div);
-
+profileEmail.innerHTML=
+data.data().email;
 
 
 }
 
 
-});
+
+};
 
 
-}
+
+
+
+
+
+saveProfile.onclick=async()=>{
+
+
+await setDoc(
+
+doc(
+db,
+"users",
+auth.currentUser.uid
+),
+
+{
+
+username:newUsername.value,
+
+email:auth.currentUser.email
+
+},
+
+{merge:true}
+
+);
+
+
+
+myName.innerHTML=
+newUsername.value;
+
+
+alert("Сохранено");
+
+
+};
+
+
+
+
+
+
+closeProfile.onclick=()=>{
+
+
+profileWindow.style.display="none";
+
+
+};
+
+
+
+
+
+
+
+logout.onclick=()=>{
+
+
+signOut(auth);
+
+
+};
