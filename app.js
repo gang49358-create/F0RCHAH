@@ -10,512 +10,200 @@ import {
 doc,
 setDoc
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
-import { auth, db } from "./firebase.js";
-
-import {
-createUserWithEmailAndPassword,
-signInWithEmailAndPassword
-} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
 
-import {
-doc,
-setDoc
-} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
-// РЕГИСТРАЦИЯ
 
-function register(){
+// РЕГИСТРАЦИЯ FIREBASE
 
-let name = document.getElementById("name").value;
-let username = document.getElementById("username").value;
+window.register = async function(){
 
 
-if(name === "" || username === ""){
+let name =
+document.getElementById("name").value;
 
-alert("Заполните все поля");
+
+let username =
+document.getElementById("username").value;
+
+
+let email =
+document.getElementById("email").value;
+
+
+let password =
+document.getElementById("password").value;
+
+
+
+if(!name || !username || !email || !password){
+
+alert("Заполни все поля");
 
 return;
 
 }
 
 
+
 if(!username.startsWith("@")){
 
-username = "@" + username;
+username="@"+username;
 
 }
 
 
-localStorage.setItem("name", name);
 
-localStorage.setItem("username", username);
+try{
 
-localStorage.setItem("status","online");
+
+let userCredential =
+await createUserWithEmailAndPassword(
+auth,
+email,
+password
+);
+
+
+
+let user =
+userCredential.user;
+
+
+
+await setDoc(
+doc(db,"users",user.uid),
+{
+
+name:name,
+
+username:username,
+
+email:email,
+
+status:"online"
+
+}
+
+);
+
+
+
+alert("Аккаунт создан");
 
 
 window.location.href="chats.html";
 
+
+}
+
+catch(error){
+
+alert(error.message);
+
 }
 
 
-
-// ВХОД
-
-function login(){
-
-let user = localStorage.getItem("name");
+};
 
 
-if(user){
 
-localStorage.setItem("status","online");
+
+
+// ВХОД FIREBASE
+
+
+window.login = async function(){
+
+
+let email =
+document.getElementById("email").value;
+
+
+let password =
+document.getElementById("password").value;
+
+
+
+try{
+
+
+await signInWithEmailAndPassword(
+auth,
+email,
+password
+);
+
+
 
 window.location.href="chats.html";
 
-}
-
-else{
-
-alert("Сначала зарегистрируйтесь");
 
 }
 
+
+catch(error){
+
+
+alert(error.message);
+
+
 }
+
+
+};
+
 
 
 
 
 // ВЫХОД
 
-function logout(){
 
-localStorage.setItem("status","offline");
+window.logout=function(){
+
+auth.signOut();
 
 window.location.href="index.html";
 
-}
+};
 
 
 
-// ОТКРЫТЬ ЧАТ
 
-function openChat(){
+
+// ПЕРЕХОДЫ
+
+
+window.openChat=function(){
 
 window.location.href="chat.html";
 
 }
 
 
-
-// НАЗАД
-
-function back(){
-
-window.location.href="chats.html";
-
-}
-
-
-
-// ОТКРЫТЬ ПРОФИЛЬ
-
-function openProfile(){
+window.openProfile=function(){
 
 window.location.href="profile.html";
 
 }
 
 
-
-// ОТПРАВКА СООБЩЕНИЯ
-
-function sendMessage(){
-
-let input =
-document.getElementById("messageInput");
-
-
-let text=input.value;
-
-
-if(text==="") return;
-
-
-let box =
-document.getElementById("messages");
-
-
-let message =
-document.createElement("div");
-
-
-message.className="message";
-
-message.innerText=text;
-
-
-box.appendChild(message);
-
-
-input.value="";
-
-}
-
-
-
-// ЗАГРУЗКА ПРОФИЛЯ
-
-function loadProfile(){
-
-
-let name =
-localStorage.getItem("name");
-
-
-let username =
-localStorage.getItem("username");
-
-
-let bio =
-localStorage.getItem("bio");
-
-
-let avatar =
-localStorage.getItem("avatar");
-
-
-
-if(document.getElementById("name")){
-
-document.getElementById("name").innerText=name;
-
-}
-
-
-if(document.getElementById("username")){
-
-document.getElementById("username").innerText=username;
-
-}
-
-
-if(document.getElementById("bio")){
-
-document.getElementById("bio").innerText =
-bio || "Описание отсутствует";
-
-}
-
-
-if(document.getElementById("avatar") && avatar){
-
-document.getElementById("avatar").src=avatar;
-
-}
-
-
-}
-
-
-
-window.onload=loadProfile;
-let photoInput = document.getElementById("photo");
-
-
-if(photoInput){
-
-
-photoInput.addEventListener("change", function(){
-
-
-let file = this.files[0];
-
-
-if(file){
-
-
-let reader = new FileReader();
-
-
-reader.onload=function(){
-
-
-localStorage.setItem(
-"avatar",
-reader.result
-);
-
-
-document.getElementById("avatar").src =
-reader.result;
-
-
-}
-
-
-reader.readAsDataURL(file);
-
-
-}
-
-
-});
-
-
-}
-
-
-
-
-function saveProfile(){
-
-
-let bio =
-document.getElementById("bioInput").value;
-
-
-
-localStorage.setItem(
-"bio",
-bio
-);
-
-
-
-loadProfile();
-
-
-
-alert("Профиль сохранён");
-
-
-}
-
-
-
-
-
-function loadProfile(){
-
-
-let name =
-localStorage.getItem("name");
-
-
-let username =
-localStorage.getItem("username");
-
-
-let bio =
-localStorage.getItem("bio");
-
-
-let avatar =
-localStorage.getItem("avatar");
-
-
-
-if(document.getElementById("profileName"))
-document.getElementById("profileName").innerText =
-name || "Имя";
-
-
-
-if(document.getElementById("profileUsername"))
-document.getElementById("profileUsername").innerText =
-username || "@username";
-
-
-
-if(document.getElementById("profileBio"))
-document.getElementById("profileBio").innerText =
-bio || "Описание отсутствует";
-
-
-
-if(document.getElementById("avatar") && avatar)
-document.getElementById("avatar").src =
-avatar;
-
-
-}
-
-
-
-window.addEventListener(
-"load",
-loadProfile
-);
-document.addEventListener("DOMContentLoaded", function(){
-
-
-let saveButton = document.getElementById("saveButton");
-
-
-if(saveButton){
-
-
-saveButton.onclick = function(){
-
-
-let bio = document.getElementById("bioInput").value;
-
-
-localStorage.setItem(
-"bio",
-bio
-);
-
-
-let bioText = document.getElementById("profileBio");
-
-
-if(bioText){
-
-bioText.innerText = bio;
-
-}
-
-
-alert("Профиль сохранён");
-
-
-};
-
-
-}
-
-
-
-});
-function openChats(){
+window.openChats=function(){
 
 window.location.href="chats.html";
 
 }
 
 
-
-function openContacts(){
+window.openContacts=function(){
 
 window.location.href="contacts.html";
 
 }
 
 
-
-function openSettings(){
+window.openSettings=function(){
 
 window.location.href="settings.html";
-
-}
-function changeTheme(){
-
-document.body.classList.toggle("light");
-
-localStorage.setItem(
-"theme",
-"dark"
-);
-
-alert("Тема DarkWeb включена");
-
-}
-function searchUser(){
-
-
-let search =
-document.getElementById("searchUser").value;
-
-
-
-let username =
-localStorage.getItem("username");
-
-
-let name =
-localStorage.getItem("name");
-
-
-
-let results =
-document.getElementById("results");
-
-
-
-results.innerHTML="";
-
-
-
-if(search === username){
-
-
-
-results.innerHTML = `
-
-
-<div class="chat">
-
-
-<div class="avatar">
-👤
-</div>
-
-
-<div>
-
-<h3>${name}</h3>
-
-<p>${username}</p>
-
-
-<button onclick="addContact()">
-Добавить
-</button>
-
-
-</div>
-
-
-</div>
-
-
-`;
-
-
-
-}else{
-
-
-results.innerHTML = `
-
-<p style="text-align:center;color:#777">
-
-Пользователь не найден
-
-</p>
-
-`;
-
-}
-
-
-
-}
-
-
-
-function addContact(){
-
-
-localStorage.setItem(
-"contact",
-"added"
-);
-
-
-
-alert("Контакт добавлен");
-
 
 }
