@@ -4,7 +4,6 @@
 <head>
 
 <meta charset="UTF-8">
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Настройки DarkWeb</title>
@@ -17,20 +16,128 @@
 <body>
 
 
-<div class="profile">
+<div class="chat-app">
 
+
+<div class="header">
 
 <h2>⚙️ Настройки</h2>
 
+</div>
 
-<button onclick="logout()">
-Выйти из аккаунта
-</button>
+
+
+<div class="chat" onclick="openProfile()">
+
+
+<div class="avatar">
+👤
+</div>
+
+
+<div>
+
+<h3>Профиль</h3>
+
+<p>
+Изменить данные аккаунта
+</p>
+
+</div>
+
+
+</div>
+
+
+
+
+<div class="chat" onclick="changeTheme()">
+
+
+<div class="avatar">
+🌑
+</div>
+
+
+<div>
+
+<h3>Тема</h3>
+
+<p>
+Тёмная тема DarkWeb
+</p>
+
+</div>
+
+
+</div>
+
+
+
+
+
+<div class="chat" onclick="logout()">
+
+
+<div class="avatar">
+🚪
+</div>
+
+
+<div>
+
+<h3>Выйти</h3>
+
+<p>
+Выход из аккаунта
+</p>
+
+</div>
+
+
+</div>
+
+
+
+
+
+<div class="bottom-menu">
 
 
 <button onclick="openChats()">
-Назад
+
+💬
+<small>Чаты</small>
+
 </button>
+
+
+<button onclick="openContacts()">
+
+👥
+<small>Контакты</small>
+
+</button>
+
+
+<button onclick="openSettings()">
+
+⚙️
+<small>Настройки</small>
+
+</button>
+
+
+<button onclick="openProfile()">
+
+👤
+<small>Профиль</small>
+
+</button>
+
+
+</div>
+
 
 
 </div>
