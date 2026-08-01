@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 <html lang="ru">
-
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -12,312 +10,74 @@
 
 </head>
 
-
 <body>
 
+<div class="app">
 
-<!-- ВХОД -->
+    <div class="sidebar">
 
-<div id="authPage">
-
-<h1>Dark Messenger</h1>
-
-
-<input id="username" placeholder="Имя пользователя">
-
-<input id="email" type="email" placeholder="Email">
-
-<input id="password" type="password" placeholder="Пароль">
+        <div class="header">
+            <h2>Dark Messenger</h2>
+            <button id="premium">
+                ⭐ Premium
+            </button>
+        </div>
 
 
-<button id="registerBtn">
-Регистрация
-</button>
+        <input 
+        id="search"
+        placeholder="Поиск">
 
 
-<button id="loginBtn">
-Войти
-</button>
+        <div id="chats"></div>
 
 
-<p id="authError"></p>
-
-</div>
+    </div>
 
 
 
+    <div class="chat-window">
+
+
+        <div class="chat-header">
+
+            <div id="chatName">
+                Выберите чат
+            </div>
+
+        </div>
+
+
+        <div id="messages">
+
+        </div>
 
 
 
-<!-- ОСНОВНОЕ ОКНО -->
+        <div class="send-box">
 
-<div id="appPage" style="display:none;">
-
-
-
-<!-- Левая колонка -->
-
-<aside id="sidebar">
+            <input 
+            id="messageInput"
+            placeholder="Сообщение">
 
 
+            <button id="send">
+                ➤
+            </button>
 
-<div id="topProfile">
-
-
-<img id="miniAvatar">
-
-
-<div>
-
-<b id="profileName">
-User
-</b>
+        </div>
 
 
-<p id="profileBio">
-Описание
-</p>
+    </div>
 
 
 </div>
 
 
-<button id="openProfile">
-☰
-</button>
-
-
-</div>
-
-
-
-
-
-<div id="search">
-
-<input placeholder="Поиск">
-
-</div>
-
-
-
-
-
-<h3>
-Чаты
-</h3>
-
-
-<div id="users">
-
-</div>
-
-
-
-
-
-<button id="premiumBtn">
-
-⭐ Dark Premium
-
-</button>
-
-
-
-
-</aside>
-
-
-
-
-
-
-
-
-
-<!-- Окно сообщений -->
-
-
-<section id="chatPanel">
-
-
-
-<header id="chatTop">
-
-
-<span>
-Выберите чат
-</span>
-
-
-<button>
-⋮
-</button>
-
-
-</header>
-
-
-
-
-
-<div id="messages">
-
-</div>
-
-
-
-
-
-<div id="messageBox">
-
-
-<input
-id="messageText"
-placeholder="Сообщение">
-
-
-
-<button id="sendBtn">
-➤
-</button>
-
-
-
-</div>
-
-
-
-
-</section>
-
-
-
-</div>
-
-
-
-
-
-
-
-
-<!-- ПРОФИЛЬ -->
-
-
-<div id="profilePage" style="display:none;">
-
-
-<h2>
-Профиль
-</h2>
-
-
-
-<img id="bigAvatar">
-
-
-<input
-id="avatarInput"
-type="file"
-accept="image/*,video/*">
-
-
-
-<input
-id="editName"
-placeholder="Имя">
-
-
-
-<textarea
-id="editBio"
-placeholder="О себе">
-</textarea>
-
-
-
-<button id="saveProfileBtn">
-Сохранить
-</button>
-
-
-
-<button id="backBtn">
-Назад
-</button>
-
-
-<button id="logoutBtn">
-Выйти
-</button>
-
-
-</div>
-
-
-
-
-
-
-
-
-
-<!-- PREMIUM -->
-
-<div id="premiumPage" style="display:none;">
-
-
-<h2>
-Dark Premium ⭐
-</h2>
-
-
-
-<p>
-Расширенные возможности:
-</p>
-
-
-<ul>
-
-<li>Без рекламы</li>
-
-<li>Особые темы</li>
-
-<li>Премиум значок</li>
-
-<li>Больше настроек профиля</li>
-
-<li>Уникальные реакции</li>
-
-</ul>
-
-
-
-<button id="buyPremium">
-Подключить Premium
-</button>
-
-
-
-<button id="closePremium">
-Назад
-</button>
-
-
-</div>
-
-
-
-
-
-
-
-
-<script type="module" src="app.js"></script>
+<script src="chats.js"></script>
+<script src="chat.js"></script>
+<script src="app.js"></script>
 
 
 </body>
-
 </html>
