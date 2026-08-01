@@ -8,138 +8,273 @@ body {
     margin: 0;
     height: 100vh;
     background: #0e1621;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    color: white;
 }
 
 
 .container {
     width: 100%;
-    max-width: 420px;
-    height: 90vh;
-    background: #17212b;
-    border-radius: 15px;
-    overflow: hidden;
-    color: white;
+    height: 100vh;
 }
 
 
+
+/* Вход */
 
 #auth {
-    padding: 30px;
+
+    max-width: 400px;
+    margin: auto;
+    padding: 40px;
     text-align: center;
+
 }
 
 
 
-h1 {
-    margin-bottom: 30px;
-    color: #4da3ff;
+#auth h1 {
+
+    color: #2aabee;
+    font-size: 32px;
+
 }
 
 
 
 input {
+
     width: 100%;
-    padding: 15px;
-    margin: 10px 0;
-    border: none;
+    padding: 14px;
+    margin: 8px 0;
+
+    background: #17212b;
+
+    border: 1px solid #2b3947;
+
     border-radius: 10px;
-    background: #242f3d;
-    color: white;
-    font-size: 16px;
+
+    color:white;
+
+    font-size:16px;
+
 }
 
 
 
 button {
-    width: 100%;
-    padding: 14px;
-    margin-top: 10px;
-    border: none;
-    border-radius: 10px;
-    background: #2aabee;
-    color: white;
-    font-size: 16px;
+
+    background:#2aabee;
+
+    color:white;
+
+    border:none;
+
+    padding:13px;
+
+    border-radius:10px;
+
+    margin-top:10px;
+
+    width:100%;
+
+    font-size:16px;
+
 }
 
 
 
-button:active {
-    opacity: 0.7;
-}
 
-
-
-#error {
-    color: #ff5555;
-}
-
+/* Чат */
 
 
 #chat {
-    height: 100%;
-    display: flex;
-    flex-direction: column;
+
+    display:flex;
+
+    height:100vh;
+
 }
 
 
 
-.header {
-    height: 60px;
-    background: #202b36;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 15px;
+
+/* Контакты */
+
+
+#contacts {
+
+    width:280px;
+
+    background:#17212b;
+
+    border-right:1px solid #263544;
+
+    padding:15px;
+
 }
 
 
 
-.header button {
-    width: auto;
-    padding: 8px 15px;
-    background: #ff5252;
+#contacts h3 {
+
+    margin-top:0;
+
+}
+
+
+
+.user {
+
+    padding:12px;
+
+    margin:5px 0;
+
+    background:#202b36;
+
+    border-radius:10px;
+
+    cursor:pointer;
+
+}
+
+
+
+.user:hover {
+
+    background:#2b5278;
+
+}
+
+
+
+
+
+/* Правая часть */
+
+
+#chat > * {
+
 }
 
 
 
 #messages {
-    flex: 1;
-    padding: 15px;
-    overflow-y: auto;
+
+    flex:1;
+
+    overflow-y:auto;
+
+    padding:20px;
+
+    background:#0e1621;
+
 }
+
 
 
 
 .message {
-    background: #2b5278;
-    padding: 10px;
-    border-radius: 12px;
-    margin-bottom: 10px;
-    max-width: 80%;
+
+    background:#2b5278;
+
+    padding:10px 15px;
+
+    border-radius:15px;
+
+    margin:8px 0;
+
+    max-width:70%;
+
+    width:max-content;
+
 }
 
 
 
+
+#chatTitle {
+
+    position:absolute;
+
+    top:0;
+
+    left:280px;
+
+    right:0;
+
+    height:60px;
+
+    background:#17212b;
+
+    padding:20px;
+
+    border-bottom:1px solid #263544;
+
+}
+
+
+
+
+.header {
+
+    display:none;
+
+}
+
+
+
+
+/* поле отправки */
+
+
 .send {
-    display: flex;
-    padding: 10px;
-    background: #202b36;
+
+    position:fixed;
+
+    bottom:0;
+
+    left:280px;
+
+    right:0;
+
+    background:#17212b;
+
+    padding:10px;
+
+    display:flex;
+
 }
 
 
 
 .send input {
-    margin: 0;
-    flex: 1;
+
+    flex:1;
+
+    margin:0;
+
 }
 
 
 
 .send button {
-    width: 55px;
-    margin-left: 10px;
-    border-radius: 50%;
+
+    width:50px;
+
+    height:50px;
+
+    border-radius:50%;
+
+    margin-left:10px;
+
+}
+
+
+
+
+
+#error {
+
+    color:#ff5555;
+
 }
