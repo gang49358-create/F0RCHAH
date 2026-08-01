@@ -23,11 +23,9 @@
 
 <h2>DarkWeb</h2>
 
-
 <button onclick="logout()">
 Выйти
 </button>
-
 
 </div>
 
@@ -37,11 +35,6 @@
 class="search"
 placeholder="Поиск..."
 >
-
-
-
-
-<div id="chatList">
 
 
 
@@ -65,16 +58,11 @@ placeholder="Поиск..."
 Личные сообщения
 </p>
 
-
 </div>
 
 
-
 </div>
 
-
-
-</div>
 
 
 
@@ -82,9 +70,37 @@ placeholder="Поиск..."
 <div class="bottom-menu">
 
 
+<button onclick="openChats()">
+
+💬
+<small>Чаты</small>
+
+</button>
+
+
+
+<button onclick="openContacts()">
+
+👥
+<small>Контакты</small>
+
+</button>
+
+
+
+<button onclick="openSettings()">
+
+⚙️
+<small>Настройки</small>
+
+</button>
+
+
+
 <button onclick="openProfile()">
 
-👤 Профиль
+👤
+<small>Профиль</small>
 
 </button>
 
@@ -93,9 +109,7 @@ placeholder="Поиск..."
 
 
 
-
 </div>
-
 
 
 <script src="app.js"></script>
