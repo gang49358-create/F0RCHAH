@@ -1,542 +1,145 @@
-*{
-box-sizing:border-box;
-}
-
-body{
-
-margin:0;
-
-height:100vh;
-
-background:#050505;
-
-color:white;
-
-font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
-
+* {
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
 }
 
 
-/* Экраны входа */
-
-.container{
-
-width:90%;
-
-max-width:380px;
-
-background:#0b0b0b;
-
-border:1px solid #1c1c1c;
-
-border-radius:25px;
-
-padding:35px;
-
-position:absolute;
-
-top:50%;
-
-left:50%;
-
-transform:translate(-50%,-50%);
-
-text-align:center;
-
-box-shadow:0 20px 60px #000;
-
+body {
+    margin: 0;
+    height: 100vh;
+    background: #0e1621;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 
-.container h1{
-
-font-size:34px;
-
-letter-spacing:2px;
-
-color:white;
-
+.container {
+    width: 100%;
+    max-width: 420px;
+    height: 90vh;
+    background: #17212b;
+    border-radius: 15px;
+    overflow: hidden;
+    color: white;
 }
 
 
 
-input{
-
-width:100%;
-
-padding:15px;
-
-margin:10px 0;
-
-background:#111;
-
-border:1px solid #222;
-
-border-radius:15px;
-
-color:white;
-
-font-size:16px;
-
-outline:none;
-
+#auth {
+    padding: 30px;
+    text-align: center;
 }
 
 
 
-input:focus{
-
-border-color:#555;
-
+h1 {
+    margin-bottom: 30px;
+    color: #4da3ff;
 }
 
 
 
-button{
-
-background:#fff;
-
-color:#000;
-
-border:none;
-
-padding:14px;
-
-border-radius:15px;
-
-font-size:16px;
-
-font-weight:600;
-
-cursor:pointer;
-
-transition:.2s;
-
+input {
+    width: 100%;
+    padding: 15px;
+    margin: 10px 0;
+    border: none;
+    border-radius: 10px;
+    background: #242f3d;
+    color: white;
+    font-size: 16px;
 }
 
 
 
-button:active{
-
-transform:scale(.96);
-
+button {
+    width: 100%;
+    padding: 14px;
+    margin-top: 10px;
+    border: none;
+    border-radius: 10px;
+    background: #2aabee;
+    color: white;
+    font-size: 16px;
 }
 
 
 
-/* Чаты */
-
-
-.chat-app{
-
-height:100vh;
-
-background:#050505;
-
+button:active {
+    opacity: 0.7;
 }
 
 
 
-.header{
-
-height:70px;
-
-background:#090909;
-
-border-bottom:1px solid #1c1c1c;
-
-display:flex;
-
-align-items:center;
-
-justify-content:space-between;
-
-padding:0 20px;
-
+#error {
+    color: #ff5555;
 }
 
 
 
-.header h2{
-
-letter-spacing:1px;
-
+#chat {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
 }
 
 
 
-.header button{
-
-background:#151515;
-
-color:white;
-
-border:1px solid #333;
-
+.header {
+    height: 60px;
+    background: #202b36;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 15px;
 }
 
 
 
-.search{
-
-margin:15px;
-
-width:calc(100% - 30px);
-
-background:#111;
-
+.header button {
+    width: auto;
+    padding: 8px 15px;
+    background: #ff5252;
 }
 
 
 
-/* карточка чата */
-
-
-.chat{
-
-display:flex;
-
-align-items:center;
-
-padding:16px;
-
-margin:10px;
-
-background:#0c0c0c;
-
-border:1px solid #1b1b1b;
-
-border-radius:18px;
-
+#messages {
+    flex: 1;
+    padding: 15px;
+    overflow-y: auto;
 }
 
 
 
-.avatar{
-
-width:55px;
-
-height:55px;
-
-border-radius:50%;
-
-background:#181818;
-
-border:1px solid #333;
-
-display:flex;
-
-align-items:center;
-
-justify-content:center;
-
-font-size:22px;
-
-margin-right:15px;
-
+.message {
+    background: #2b5278;
+    padding: 10px;
+    border-radius: 12px;
+    margin-bottom: 10px;
+    max-width: 80%;
 }
 
 
 
-/* статус */
-
-
-.status{
-
-display:inline-block;
-
-width:9px;
-
-height:9px;
-
-border-radius:50%;
-
-margin-right:5px;
-
+.send {
+    display: flex;
+    padding: 10px;
+    background: #202b36;
 }
 
 
 
-.online{
-
-background:#00ff66;
-
-box-shadow:0 0 10px #00ff66;
-
+.send input {
+    margin: 0;
+    flex: 1;
 }
 
 
 
-/* нижняя панель */
-
-
-.bottom-menu{
-
-position:fixed;
-
-bottom:0;
-
-left:0;
-
-width:100%;
-
-height:75px;
-
-background:#090909;
-
-border-top:1px solid #1c1c1c;
-
-display:flex;
-
-align-items:center;
-
-justify-content:center;
-
-}
-
-
-
-.bottom-menu button{
-
-width:180px;
-
-background:#fff;
-
-}
-
-
-
-/* профиль */
-
-
-.profile{
-
-height:100vh;
-
-background:#050505;
-
-display:flex;
-
-flex-direction:column;
-
-align-items:center;
-
-justify-content:center;
-
-padding:20px;
-
-}
-
-
-
-.profile-avatar{
-
-width:140px;
-
-height:140px;
-
-border-radius:50%;
-
-object-fit:cover;
-
-background:#111;
-
-border:2px solid #333;
-
-}
-
-
-
-.profile p{
-
-color:#999;
-
-font-size:17px;
-
-}
-
-
-
-/* чат */
-
-
-.chat-window{
-
-height:100vh;
-
-background:#050505;
-
-display:flex;
-
-flex-direction:column;
-
-}
-
-
-
-.chat-header{
-
-height:70px;
-
-background:#090909;
-
-border-bottom:1px solid #1c1c1c;
-
-display:flex;
-
-align-items:center;
-
-gap:15px;
-
-padding:15px;
-
-}
-
-
-
-.messages{
-
-flex:1;
-
-padding:15px;
-
-overflow:auto;
-
-}
-
-
-
-.message{
-
-background:#fff;
-
-color:#000;
-
-padding:12px 16px;
-
-border-radius:18px;
-
-margin:10px 0;
-
-max-width:75%;
-
-margin-left:auto;
-
-}
-
-
-
-.send-box{
-
-display:flex;
-
-background:#090909;
-
-padding:10px;
-
-border-top:1px solid #1c1c1c;
-
-}
-
-
-
-.send-box input{
-
-margin:0;
-
-}
-
-
-
-.send-box button{
-
-width:55px;
-
-height:55px;
-
-border-radius:50%;
-
-margin-left:10px;
-
-}
-
-
-
-/* скрытый стиль */
-
-::-webkit-scrollbar{
-
-width:0;
-
-}
-.favorite{
-
-background:#191919;
-
-}
-
-
-
-.bottom-menu{
-
-position:fixed;
-
-bottom:0;
-
-left:0;
-
-width:100%;
-
-height:75px;
-
-background:#090909;
-
-border-top:1px solid #222;
-
-display:flex;
-
-justify-content:space-around;
-
-align-items:center;
-
-}
-
-
-
-.bottom-menu button{
-
-background:none;
-
-color:#aaa;
-
-display:flex;
-
-flex-direction:column;
-
-align-items:center;
-
-font-size:22px;
-
-}
-
-
-
-.bottom-menu small{
-
-font-size:11px;
-
-color:#aaa;
-
-}
-#results{
-
-margin-top:20px;
-
-}
-
-
-#results button{
-
-margin-top:10px;
-
+.send button {
+    width: 55px;
+    margin-left: 10px;
+    border-radius: 50%;
 }
