@@ -89,3 +89,42 @@ messages.appendChild(message);
 input.value = "";
 
 }
+function sendMessage(){
+
+let input = document.getElementById("messageInput");
+
+let text = input.value;
+
+
+if(text.trim() === ""){
+return;
+}
+
+
+let messages = document.getElementById("messages");
+
+
+let message = document.createElement("div");
+
+
+message.className = "message";
+
+
+message.innerText = text;
+
+
+messages.appendChild(message);
+
+
+input.value = "";
+
+
+}
+
+
+
+function back(){
+
+window.location.href="chats.html";
+
+}
