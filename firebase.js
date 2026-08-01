@@ -2,34 +2,28 @@ import { initializeApp } from
 "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 
 
-import { 
-getAuth 
-} from 
+import { getAuth } from 
 "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
 
-import { 
-getFirestore 
-} from 
+import { getFirestore } from 
 "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 
 
-// ВСТАВЬ СЮДА СВОЙ FIREBASE CONFIG
-
 const firebaseConfig = {
 
-apiKey: "ТВОЙ_API_KEY",
+apiKey: "AIzaSyASNOjPhKOw3WWo1xew6oa09pbIkjzbqeE",
 
-authDomain: "ТВОЙ_PROJECT.firebaseapp.com",
+authDomain: "darkweb-8acc4.firebaseapp.com",
 
-projectId: "ТВОЙ_PROJECT_ID",
+projectId: "darkweb-8acc4",
 
-storageBucket: "ТВОЙ_PROJECT.appspot.com",
+storageBucket: "darkweb-8acc4.firebasestorage.app",
 
-messagingSenderId: "ТВОЙ_SENDER_ID",
+messagingSenderId: "957568283427",
 
-appId: "ТВОЙ_APP_ID"
+appId: "1:957568283427:web:157087de0403e69dcb5296"
 
 };
 
@@ -40,5 +34,6 @@ const app = initializeApp(firebaseConfig);
 
 
 export const auth = getAuth(app);
+
 
 export const db = getFirestore(app);
