@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>MyMessenger Чаты</title>
+<title>MyMessenger - Чаты</title>
 
 <link rel="stylesheet" href="style.css">
 
@@ -15,7 +15,6 @@
 
 <body>
 
-
 <div class="chat-app">
 
 
@@ -23,10 +22,11 @@
 
 <h2>MyMessenger</h2>
 
-<button onclick="logout()">Выйти</button>
+<button onclick="logout()">
+Выйти
+</button>
 
 </div>
-
 
 
 <input 
@@ -35,11 +35,11 @@ placeholder="Поиск чатов..."
 >
 
 
-
 <div id="chatList">
 
 
 <div class="chat" onclick="openChat()">
+
 
 <div class="avatar">
 M
@@ -50,7 +50,7 @@ M
 
 <h3>Мой чат</h3>
 
-<p>Добро пожаловать!</p>
+<p>Нажми, чтобы открыть</p>
 
 </div>
 
@@ -58,14 +58,12 @@ M
 </div>
 
 
-
 </div>
 
 
-<button class="new-chat">
 
+<button class="new-chat" onclick="openChat()">
 +
-
 </button>
 
 
