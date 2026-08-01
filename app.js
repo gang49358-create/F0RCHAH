@@ -1,159 +1,130 @@
-import { auth, db } from "./firebase.js";
+const chatBox =
+document.getElementById("chats");
 
 
-import {
 
-createUserWithEmailAndPassword,
+function renderChats(){
 
-signInWithEmailAndPassword,
 
-onAuthStateChanged,
+chatBox.innerHTML="";
 
-signOut
+
+chats.forEach(chat=>{
+
+
+let div =
+document.createElement("div");
+
+
+div.className="chat-item";
+
+
+div.innerHTML=`
+
+<div class="avatar">
+${chat.avatar}
+</div>
+
+
+<div>
+
+<b>${chat.name}</b>
+
+<br>
+
+<small>
+${chat.last}
+</small>
+
+</div>
+
+`;
+
+
+
+div.onclick=()=>{
+
+openChat(chat.id);
+
+};
+
+
+
+chatBox.appendChild(div);
+
+
+
+});
+
 
 }
 
-from
-
-"https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
 
+renderChats();
 
-import {
 
-doc,
 
-setDoc,
 
-getDoc,
 
-getDocs,
+// отправка сообщений
 
-collection,
 
-addDoc,
+document
+.getElementById("send")
+.onclick=function(){
 
-onSnapshot,
 
-query,
+let input =
+document.getElementById("messageInput");
 
-orderBy
+
+
+let text =
+input.value.trim();
+
+
+
+if(text){
+
+
+sendMessage(text);
+
+
+input.value="";
+
 
 }
 
-from
 
-"https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+};
 
 
 
 
-// ---------- ЭЛЕМЕНТЫ ----------
 
+// Enter для отправки
 
 
-const authPage =
-document.getElementById("authPage");
+document
+.getElementById("messageInput")
+.addEventListener(
+"keypress",
+function(e){
 
 
-const appPage =
-document.getElementById("appPage");
+if(e.key==="Enter"){
 
 
+document
+.getElementById("send")
+.click();
 
-const username =
-document.getElementById("username");
 
+}
 
-const email =
-document.getElementById("email");
 
-
-const password =
-document.getElementById("password");
-
-
-
-const registerBtn =
-document.getElementById("registerBtn");
-
-
-const loginBtn =
-document.getElementById("loginBtn");
-
-
-
-const authError =
-document.getElementById("authError");
-
-
-
-
-
-const users =
-document.getElementById("users");
-
-
-
-const messages =
-document.getElementById("messages");
-
-
-const messageText =
-document.getElementById("messageText");
-
-
-const sendBtn =
-document.getElementById("sendBtn");
-
-
-
-const chatTop =
-document.getElementById("chatTop");
-
-
-
-
-const profileName =
-document.getElementById("profileName");
-
-
-const profileBio =
-document.getElementById("profileBio");
-
-
-
-
-
-// профиль
-
-
-const openProfile =
-document.getElementById("openProfile");
-
-
-const profilePage =
-document.getElementById("profilePage");
-
-
-const backBtn =
-document.getElementById("backBtn");
-
-
-const logoutBtn =
-document.getElementById("logoutBtn");
-
-
-const editName =
-document.getElementById("editName");
-
-
-const editBio =
-document.getElementById("editBio");
-
-
-const saveProfileBtn =
-document.getElementById("saveProfileBtn");
+});
 
 
 
@@ -162,553 +133,14 @@ document.getElementById("saveProfileBtn");
 // Premium
 
 
-const premiumBtn =
-document.getElementById("premiumBtn");
+document
+.getElementById("premium")
+.onclick=function(){
 
 
-const premiumPage =
-document.getElementById("premiumPage");
-
-
-const closePremium =
-document.getElementById("closePremium");
-
-
-
-const buyPremium =
-document.getElementById("buyPremium");
-
-
-
-
-
-
-let selectedUser = null;
-
-
-
-
-
-
-
-
-
-// ---------- РЕГИСТРАЦИЯ ----------
-
-
-registerBtn.onclick = async()=>{
-
-
-try{
-
-
-const user =
-
-await createUserWithEmailAndPassword(
-
-auth,
-
-email.value,
-
-password.value
-
+alert(
+"⭐ Dark Premium активирован!"
 );
-
-
-
-await setDoc(
-
-doc(db,"users",user.user.uid),
-
-{
-
-username:username.value,
-
-email:email.value,
-
-bio:"",
-
-premium:false
-
-}
-
-);
-
-
-
-}
-
-catch(e){
-
-authError.innerHTML=e.message;
-
-}
-
-
-};
-
-
-
-
-
-
-
-
-
-// ---------- ВХОД ----------
-
-
-loginBtn.onclick = async()=>{
-
-
-try{
-
-
-await signInWithEmailAndPassword(
-
-auth,
-
-email.value,
-
-password.value
-
-);
-
-
-
-}
-
-catch(e){
-
-authError.innerHTML=e.message;
-
-}
-
-
-};
-
-
-
-
-
-
-
-
-
-// ---------- ПРОВЕРКА ----------
-
-
-onAuthStateChanged(auth,async(user)=>{
-
-
-if(user){
-
-
-authPage.style.display="none";
-
-
-appPage.style.display="flex";
-
-
-
-loadProfile();
-
-
-loadUsers();
-
-
-}
-
-else{
-
-
-authPage.style.display="block";
-
-appPage.style.display="none";
-
-
-}
-
-
-
-});
-
-
-
-
-
-
-
-
-
-// ---------- ПРОФИЛЬ ----------
-
-
-async function loadProfile(){
-
-
-let data = await getDoc(
-
-doc(db,"users",auth.currentUser.uid)
-
-);
-
-
-
-if(data.exists()){
-
-
-let p=data.data();
-
-
-profileName.innerHTML=p.username;
-
-
-profileBio.innerHTML=p.bio || "Описание";
-
-
-editName.value=p.username;
-
-
-editBio.value=p.bio || "";
-
-
-}
-
-
-
-}
-
-
-
-
-
-openProfile.onclick=()=>{
-
-
-profilePage.style.display="block";
-
-
-};
-
-
-
-
-backBtn.onclick=()=>{
-
-
-profilePage.style.display="none";
-
-
-};
-
-
-
-
-
-
-
-saveProfileBtn.onclick=async()=>{
-
-
-await setDoc(
-
-doc(db,"users",auth.currentUser.uid),
-
-{
-
-username:editName.value,
-
-bio:editBio.value
-
-},
-
-{merge:true}
-
-);
-
-
-
-loadProfile();
-
-
-};
-
-
-
-
-
-
-
-logoutBtn.onclick=()=>{
-
-
-signOut(auth);
-
-
-};
-
-
-
-
-
-
-
-
-
-// ---------- КОНТАКТЫ ----------
-
-
-async function loadUsers(){
-
-
-users.innerHTML="";
-
-
-
-let list=
-
-await getDocs(
-
-collection(db,"users")
-
-);
-
-
-
-list.forEach((item)=>{
-
-
-if(item.id!==auth.currentUser.uid){
-
-
-let data=item.data();
-
-
-
-let div=document.createElement("div");
-
-
-div.className="user";
-
-
-div.innerHTML=data.username;
-
-
-
-div.onclick=()=>{
-
-
-selectedUser=item.id;
-
-
-chatTop.innerHTML=data.username;
-
-
-loadMessages();
-
-
-};
-
-
-
-users.appendChild(div);
-
-
-
-}
-
-
-
-});
-
-
-
-}
-
-
-
-
-
-
-
-
-
-// ---------- СООБЩЕНИЯ ----------
-
-
-sendBtn.onclick=async()=>{
-
-
-if(!selectedUser)return;
-
-
-let text=messageText.value;
-
-
-if(text.trim()=="")return;
-
-
-
-let id=[
-
-auth.currentUser.uid,
-
-selectedUser
-
-]
-.sort()
-.join("_");
-
-
-
-await addDoc(
-
-collection(db,"chats",id,"messages"),
-
-{
-
-
-text:text,
-
-from:auth.currentUser.uid,
-
-time:Date.now()
-
-}
-
-);
-
-
-
-messageText.value="";
-
-
-};
-
-
-
-
-
-
-
-
-function loadMessages(){
-
-
-let id=[
-
-auth.currentUser.uid,
-
-selectedUser
-
-]
-.sort()
-.join("_");
-
-
-
-let q=query(
-
-collection(db,"chats",id,"messages"),
-
-orderBy("time")
-
-);
-
-
-
-onSnapshot(q,(snap)=>{
-
-
-messages.innerHTML="";
-
-
-
-snap.forEach((m)=>{
-
-
-let d=m.data();
-
-
-
-let div=document.createElement("div");
-
-
-div.className="message";
-
-
-div.innerHTML=d.text;
-
-
-
-messages.appendChild(div);
-
-
-});
-
-
-
-});
-
-
-}
-
-
-
-
-
-
-
-
-
-// ---------- PREMIUM ----------
-
-
-
-premiumBtn.onclick=()=>{
-
-
-premiumPage.style.display="block";
-
-
-};
-
-
-
-
-closePremium.onclick=()=>{
-
-
-premiumPage.style.display="none";
-
-
-};
-
-
-
-
-
-buyPremium.onclick=async()=>{
-
-
-await setDoc(
-
-doc(db,"users",auth.currentUser.uid),
-
-{
-
-premium:true
-
-},
-
-{merge:true}
-
-);
-
-
-
-alert("Dark Premium подключён ⭐");
 
 
 };
